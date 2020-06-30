@@ -22,6 +22,8 @@ namespace Shelfish.Data
         public string Title { get; set; }
 
         //Figure out how to make this nullable? Or just leave non-required?
+        [MaxLength(50, ErrorMessage ="Must contain fewer than 50 characters.")]
+        [Display(Name ="Series Name/Number")]
         public string SeriesTitle { get; set; }
 
         [Required]
@@ -36,12 +38,15 @@ namespace Shelfish.Data
         public Genre Genre { get; set; }
 
         [Required]
+        [MaxLength(20, ErrorMessage ="Must contain fewer than 20 characters.")]
         public string Language { get; set; }
 
         [Required]
+        [MaxLength(55, ErrorMessage ="Must contain fewer than 55 characters.")]
         public string Publisher { get; set; }
 
         [Required]
+        [Display(Name="Is this an E-book?")]
         public bool IsEbook { get; set; } = false;
 
         [ForeignKey("Author")]

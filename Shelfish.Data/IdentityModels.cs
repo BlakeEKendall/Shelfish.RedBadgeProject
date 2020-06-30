@@ -38,7 +38,7 @@ namespace Shelfish.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Audiobook> Audiobooks { get; set; }
         public DbSet<Author> Authors { get; set; }
-        public DbSet<Country> Countries { get; set; }
+        //public DbSet<Country> Countries { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Bookshelf> Bookshelves { get; set; }
 
