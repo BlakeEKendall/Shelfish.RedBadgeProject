@@ -14,7 +14,7 @@ namespace Shelfish.Data
         public int AuthorId { get; set; }
 
         [Required]
-        [MinLength(1, ErrorMessage ="Author name cannot be blank, please enter at least one character.")]
+        //[MinLength(1, ErrorMessage ="Author name cannot be blank, please enter at least one character.")]
         public string Name { get; set; }
 
         [Required]
