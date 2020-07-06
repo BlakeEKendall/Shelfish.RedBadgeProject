@@ -63,6 +63,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AudiobookModels\" />
+    <Folder Include="AuthorModels\" />
+    <Folder Include="BookModels\" />
+    <Folder Include="BookshelfModels\" />
+    <Folder Include="ReviewModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
