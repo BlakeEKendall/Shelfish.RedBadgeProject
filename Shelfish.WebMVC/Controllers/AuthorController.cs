@@ -52,5 +52,43 @@ namespace Shelfish.WebMVC.Controllers
 
             return View(model);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var service = new AuthorService();
+            var detail = service.GetAuthorById(id);
+            var model =
+                new AuthorEdit
+                {
+                    AuthorId = detail.AuthorId,
+                    Name = detail.Name,
+                    CountryName = detail.CountryName
+                };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, AuthorEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.AuthorId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = new AuthorService();
+
+            if (service.UpdateAuthor(model))
+            {
+                TempData["SaveResult"] = "Your author was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your author could not be updated.");
+            return View(model);
+        }
     }
 }

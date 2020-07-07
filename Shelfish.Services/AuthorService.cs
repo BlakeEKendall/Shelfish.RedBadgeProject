@@ -64,5 +64,21 @@ namespace Shelfish.Services
                         };
             }
         }
+
+        public bool UpdateAuthor(AuthorEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Authors
+                        .Single(e => e.AuthorId == model.AuthorId);
+
+                entity.Name = model.Name;
+                entity.CountryName = model.CountryName;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
