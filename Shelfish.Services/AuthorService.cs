@@ -46,5 +46,23 @@ namespace Shelfish.Services
                 return query.ToArray();
             }
         }
+
+        public AuthorDetail GetAuthorById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Authors
+                        .Single(e => e.AuthorId == id);
+                    return
+                        new AuthorDetail
+                        {
+                            AuthorId = entity.AuthorId,
+                            Name = entity.Name,
+                            CountryName = entity.CountryName
+                        };
+            }
+        }
     }
 }
