@@ -118,6 +118,7 @@ namespace Shelfish.WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
+
         private static AuthorDetail AuthorDetailService(int id)
         {
             var service = new AuthorService();
