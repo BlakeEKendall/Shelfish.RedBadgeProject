@@ -353,6 +353,7 @@
     <Content Include="Views\Author\Details.cshtml" />
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Author\Delete.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTimeOffset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
