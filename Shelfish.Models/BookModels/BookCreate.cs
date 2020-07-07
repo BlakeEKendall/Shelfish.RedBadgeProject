@@ -23,6 +23,10 @@ namespace Shelfish.Models.BookModels
         [DefaultValue(null)]
         public string SeriesTitle { get; set; }
 
+
+        [Required]
+        public int AuthorId { get; set; }
+
         [Required]
         [StringLength(13, ErrorMessage = "ISBN must contain 13 characters.")]
         public int Isbn { get; set; }
@@ -47,7 +51,5 @@ namespace Shelfish.Models.BookModels
         [DefaultValue(false)]
         public bool IsEbook { get; set; }
 
-        [Required]
-        public int AuthorId { get; set; }
     }
 }
