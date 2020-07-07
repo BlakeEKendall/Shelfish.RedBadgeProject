@@ -348,11 +348,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Author\Index.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audiobook\" />
-    <Folder Include="Views\Author\" />
     <Folder Include="Views\Bookshelf\" />
     <Folder Include="Views\Book\" />
     <Folder Include="Views\Review\" />

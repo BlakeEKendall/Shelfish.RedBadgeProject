@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,8 @@ namespace Shelfish.Models.BookModels
     {
         public int BookId { get; set; }
         
-        [MinLength(1, ErrorMessage = "Title must contain at least one character.")]
-        [MaxLength(300, ErrorMessage = "Title cannot contain more than 300 characters.")]
+        //[MinLength(1, ErrorMessage = "Title must contain at least one character.")]
+        //[MaxLength(300, ErrorMessage = "Title cannot contain more than 300 characters.")]
         public string Title { get; set; }
 
         //Figure out how to make this nullable? Or just leave non-required?

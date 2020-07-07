@@ -11,7 +11,7 @@ namespace Shelfish.Models.AuthorModels
     {
         public int AuthorId { get; set; }
 
-        [MinLength(1, ErrorMessage ="Author name cannot be blank, please enter at least one character.")]
         public string Name { get; set; }
+
     }
 }

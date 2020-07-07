@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Shelfish.WebMVC.Controllers
 {
+    [Authorize]
     public class BookshelfController : Controller
     {
         // GET: Bookshelf
