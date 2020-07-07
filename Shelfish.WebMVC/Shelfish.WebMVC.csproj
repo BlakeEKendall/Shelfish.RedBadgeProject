@@ -354,12 +354,13 @@
     <Content Include="Views\Author\Edit.cshtml" />
     <Content Include="Views\Author\Delete.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTimeOffset.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Audiobook\" />
     <Folder Include="Views\Bookshelf\" />
-    <Folder Include="Views\Book\" />
     <Folder Include="Views\Review\" />
   </ItemGroup>
   <ItemGroup>
