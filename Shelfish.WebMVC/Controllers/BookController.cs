@@ -46,5 +46,13 @@ namespace Shelfish.WebMVC.Controllers
 
             return View(model);
         }
+
+        public ActionResult Details(int id)
+        {
+            var svc = new BookService();
+            var model = svc.GetBookById(id);
+
+            return View(model);
+        }
     }
 }

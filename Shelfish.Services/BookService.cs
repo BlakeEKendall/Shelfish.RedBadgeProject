@@ -55,5 +55,30 @@ namespace Shelfish.Services
             }
         }
 
+        public BookDetail GetBookById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Books
+                        .Single(e => e.BookId == id);
+                return
+                    new BookDetail
+                    {
+                        BookId = entity.BookId,
+                        Title = entity.Title,
+                        SeriesTitle = entity.SeriesTitle,
+                        AuthorName = entity.Author.Name,
+                        Isbn = entity.Isbn,
+                        Rating = entity.Rating,
+                        Genre = entity.Genre,
+                        Language = entity.Language,
+                        Publisher = entity.Publisher,
+                        IsEbook = entity.IsEbook
+                    };
+            }
+        }
+
     }
 }
