@@ -45,6 +45,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+
         public ActionResult Details(int id)
         {
             var svc = new AuthorService();
@@ -53,10 +54,10 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+
         public ActionResult Edit(int id)
         {
-            var service = new AuthorService();
-            var detail = service.GetAuthorById(id);
+            AuthorDetail detail = AuthorDetailService(id);
             var model =
                 new AuthorEdit
                 {
@@ -67,6 +68,8 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, AuthorEdit model)
@@ -75,7 +78,7 @@ namespace Shelfish.WebMVC.Controllers
 
             if (model.AuthorId != id)
             {
-                ModelState.AddModelError("", "Id Mismatch");
+                ModelState.AddModelError("", "Id Mismatch. Please try again.");
                 return View(model);
             }
 
@@ -91,14 +94,15 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var svc = new AuthorService();
-            var model = svc.GetAuthorById(id);
+            AuthorDetail detail = AuthorDetailService(id);
 
-            return View(model);
+            return View(detail);
         }
+
 
         [HttpPost]
         [ActionName("Delete")]
@@ -112,6 +116,13 @@ namespace Shelfish.WebMVC.Controllers
             TempData["SaveResult"] = "Your author was deleted";
 
             return RedirectToAction("Index");
+        }
+
+        private static AuthorDetail AuthorDetailService(int id)
+        {
+            var service = new AuthorService();
+            var detail = service.GetAuthorById(id);
+            return detail;
         }
     }
 }
