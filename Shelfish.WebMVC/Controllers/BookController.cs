@@ -1,4 +1,5 @@
 ﻿using Shelfish.Models.BookModels;
+using Shelfish.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace Shelfish.WebMVC.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            var model = new BookListItem[0];
+            var service = new BookService();
+            var model = service.GetBooks();
+
             return View(model);
         }
 
@@ -29,10 +32,18 @@ namespace Shelfish.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BookCreate model)
         {
-            if (ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) return View(model);
 
-            }
+            var service = new BookService();
+
+            if (service.CreateBook(model))
+            {
+                TempData["SaveResult"] = "Your book was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Book could not be created.");
+
             return View(model);
         }
     }

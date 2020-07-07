@@ -62,6 +62,7 @@
     <Compile Include="AuthorModels\AuthorEdit.cs" />
     <Compile Include="AuthorModels\AuthorListItem.cs" />
     <Compile Include="BookModels\BookCreate.cs" />
+    <Compile Include="BookModels\BookDetail.cs" />
     <Compile Include="BookModels\BookListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
