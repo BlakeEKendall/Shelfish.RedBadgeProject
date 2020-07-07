@@ -90,5 +90,28 @@ namespace Shelfish.WebMVC.Controllers
             ModelState.AddModelError("", "Your author could not be updated.");
             return View(model);
         }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var svc = new AuthorService();
+            var model = svc.GetAuthorById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = new AuthorService();
+
+            service.DeleteAuthor(id);
+
+            TempData["SaveResult"] = "Your author was deleted";
+
+            return RedirectToAction("Index");
+        }
     }
 }

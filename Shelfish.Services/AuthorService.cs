@@ -80,5 +80,20 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteAuthor(int authorId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Authors
+                        .Single(e => e.AuthorId == authorId);
+
+                ctx.Authors.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
