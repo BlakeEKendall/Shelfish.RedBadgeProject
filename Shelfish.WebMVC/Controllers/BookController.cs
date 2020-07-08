@@ -47,11 +47,32 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+
         public ActionResult Details(int id)
         {
             var svc = new BookService();
             var model = svc.GetBookById(id);
 
+            return View(model);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var service = new BookService();
+            var detail = service.GetBookById(id);
+            var model =
+                new BookEdit
+                {
+                    BookId = detail.BookId,
+                    Title = detail.Title,
+                    SeriesTitle = detail.SeriesTitle,
+                    Isbn = detail.Isbn,
+                    Rating = detail.Rating,
+                    Genre = detail.Genre,
+                    Language = detail.Language,
+                    Publisher = detail.Publisher,
+                    IsEbook = detail.IsEbook
+        };
             return View(model);
         }
     }

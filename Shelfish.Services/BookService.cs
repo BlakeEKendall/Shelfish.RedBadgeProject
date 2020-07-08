@@ -80,5 +80,27 @@ namespace Shelfish.Services
             }
         }
 
+        public bool UpdateBook(BookEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Books
+                        .Single(e => e.BookId == model.BookId);
+
+                entity.Title = model.Title;
+                entity.SeriesTitle = model.SeriesTitle;
+                entity.Isbn = model.Isbn;
+                entity.Rating = model.Rating;
+                entity.Genre = model.Genre;
+                entity.Language = model.Language;
+                entity.Publisher = model.Publisher;
+                entity.IsEbook = model.IsEbook;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
     }
 }
