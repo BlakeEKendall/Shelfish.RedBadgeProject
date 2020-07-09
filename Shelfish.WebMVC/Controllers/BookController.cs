@@ -72,7 +72,32 @@ namespace Shelfish.WebMVC.Controllers
                     Language = detail.Language,
                     Publisher = detail.Publisher,
                     IsEbook = detail.IsEbook
-        };
+                };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, BookEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.BookId != id)
+            {
+                ModelState.AddModelError("", "Id does not match an existing item, please try again.");
+                return View(model);
+            }
+
+            var service = new BookService();
+
+            if (service.UpdateBook(model))
+            {
+                TempData["SaveResult"] = "Your book was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your book could not be updated.");
             return View(model);
         }
     }

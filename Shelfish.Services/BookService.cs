@@ -10,20 +10,20 @@ namespace Shelfish.Services
 {
     public class BookService
     {
-        public bool CreateBook(BookCreate model)
+        public bool CreateBook(BookCreate bookToCreate)
         {
             var entity =
                 new Book()
                 {
-                    Title = model.Title,
-                    SeriesTitle = model.SeriesTitle,
-                    AuthorId = model.AuthorId,
-                    Isbn = model.Isbn,
-                    Rating = model.Rating,
-                    Genre = model.Genre,
-                    Language = model.Language,
-                    Publisher = model.Publisher,
-                    IsEbook = model.IsEbook
+                    Title = bookToCreate.Title,
+                    SeriesTitle = bookToCreate.SeriesTitle,
+                    AuthorId = bookToCreate.AuthorId,
+                    Isbn = bookToCreate.Isbn,
+                    Rating = bookToCreate.Rating,
+                    Genre = bookToCreate.Genre,
+                    Language = bookToCreate.Language,
+                    Publisher = bookToCreate.Publisher,
+                    IsEbook = bookToCreate.IsEbook
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -80,23 +80,23 @@ namespace Shelfish.Services
             }
         }
 
-        public bool UpdateBook(BookEdit model)
+        public bool UpdateBook(BookEdit bookToBeUpdated)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                         .Books
-                        .Single(e => e.BookId == model.BookId);
+                        .Single(e => e.BookId == bookToBeUpdated.BookId);
 
-                entity.Title = model.Title;
-                entity.SeriesTitle = model.SeriesTitle;
-                entity.Isbn = model.Isbn;
-                entity.Rating = model.Rating;
-                entity.Genre = model.Genre;
-                entity.Language = model.Language;
-                entity.Publisher = model.Publisher;
-                entity.IsEbook = model.IsEbook;
+                entity.Title = bookToBeUpdated.Title;
+                entity.SeriesTitle = bookToBeUpdated.SeriesTitle;
+                entity.Isbn = bookToBeUpdated.Isbn;
+                entity.Rating = bookToBeUpdated.Rating;
+                entity.Genre = bookToBeUpdated.Genre;
+                entity.Language = bookToBeUpdated.Language;
+                entity.Publisher = bookToBeUpdated.Publisher;
+                entity.IsEbook = bookToBeUpdated.IsEbook;
 
                 return ctx.SaveChanges() == 1;
             }
