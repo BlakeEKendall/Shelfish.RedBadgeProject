@@ -20,7 +20,7 @@ namespace Shelfish.Models.BookModels
 
         [MaxLength(50, ErrorMessage = "Must contain fewer than 50 characters.")]
         [Display(Name = "Series Name/Number")]
-        [DefaultValue(null)]
+        [DefaultValue("N/A")]
         public string SeriesTitle { get; set; }
 
 
