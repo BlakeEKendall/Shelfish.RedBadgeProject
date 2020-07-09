@@ -10,6 +10,7 @@ namespace Shelfish.Models.BookModels
 {
     public class BookEdit
     {
+        [Display(Name ="Book ID")]
         public int BookId { get; set; }
 
         public string Title { get; set; }
@@ -17,6 +18,7 @@ namespace Shelfish.Models.BookModels
         [Display(Name = "Series Title/Number")]
         public string SeriesTitle { get; set; }
 
+        [Display(Name ="ISBN")]
         public string Isbn { get; set; }
 
         public int Rating { get; set; }

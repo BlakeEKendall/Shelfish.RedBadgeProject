@@ -9,6 +9,7 @@ namespace Shelfish.Models.AuthorModels
 {
     public class AuthorDetail
     {
+        [Display(Name="Author ID")]
         public int AuthorId { get; set; }
 
         public string Name { get; set; }

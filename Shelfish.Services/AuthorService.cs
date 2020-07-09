@@ -13,7 +13,7 @@ namespace Shelfish.Services
         
         public bool CreateAuthor(AuthorCreate model)
         {
-            var entity =
+            var authorToCreate =
                 new Author()
                 {
                     Name = model.Name,
@@ -22,7 +22,7 @@ namespace Shelfish.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Authors.Add(entity);
+                ctx.Authors.Add(authorToCreate);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -69,13 +69,13 @@ namespace Shelfish.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var authorToUpdate =
                     ctx
                         .Authors
                         .Single(e => e.AuthorId == model.AuthorId);
 
-                entity.Name = model.Name;
-                entity.CountryName = model.CountryName;
+                authorToUpdate.Name = model.Name;
+                authorToUpdate.CountryName = model.CountryName;
 
                 return ctx.SaveChanges() == 1;
             }
@@ -85,12 +85,12 @@ namespace Shelfish.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity =
+                var authorToDelete =
                     ctx
                         .Authors
                         .Single(e => e.AuthorId == authorId);
 
-                ctx.Authors.Remove(entity);
+                ctx.Authors.Remove(authorToDelete);
 
                 return ctx.SaveChanges() == 1;
             }

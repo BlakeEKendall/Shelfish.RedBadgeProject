@@ -11,12 +11,15 @@ namespace Shelfish.Models.BookModels
 {
     public class BookListItem
     {
+        [Display(Name ="Book ID")]
         public int BookId { get; set; }
 
         public string Title { get; set; }
 
+        [Display(Name ="Author")]
         public string AuthorName { get; set; }
 
+        [Display(Name ="ISBN")]
         public string Isbn { get; set; }
 
         

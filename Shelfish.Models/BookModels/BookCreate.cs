@@ -18,7 +18,6 @@ namespace Shelfish.Models.BookModels
         public string Title { get; set; }
 
 
-        //Figure out how to make this nullable? Or just leave non-required?
         [MaxLength(50, ErrorMessage = "Must contain fewer than 50 characters.")]
         [Display(Name = "Series Name/Number")]
         [DefaultValue(null)]
@@ -26,12 +25,13 @@ namespace Shelfish.Models.BookModels
 
 
         [Required]
-        [Display(Name ="Author Id")]
+        [Display(Name ="Author ID")]
         public int AuthorId { get; set; }
 
 
         [Required]
         [StringLength(13, MinimumLength = 13, ErrorMessage = "ISBN must contain 13 characters.")]
+        [Display(Name ="ISBN")]
         public string Isbn { get; set; }
 
 
@@ -41,6 +41,7 @@ namespace Shelfish.Models.BookModels
 
 
         [Required]
+        [Display(Name ="Genre")]
         public Genre Genre { get; set; }
 
 

@@ -17,6 +17,7 @@ namespace Shelfish.Models.AuthorModels
         [Required]
         [MinLength(4, ErrorMessage = "Country name must be at least 4 characters long.")]
         [MaxLength(60, ErrorMessage = "Country name must be fewer than 60 characters.")]
+        [Display(Name="Country of Origin")]
         public string CountryName { get; set; }
     }
 }
