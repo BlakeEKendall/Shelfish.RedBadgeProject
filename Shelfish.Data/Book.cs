@@ -67,7 +67,7 @@ namespace Shelfish.Data
         [Display(Name = "Video Games")]
         VideoGames,
 
-        [Display(Name = "Graphic Novels"]
+        [Display(Name = "Graphic Novels")]
         GraphicNovel,
 
         Manga,
