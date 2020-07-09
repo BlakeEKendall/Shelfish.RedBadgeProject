@@ -17,7 +17,7 @@ namespace Shelfish.Models.BookModels
         [Display(Name = "Series Title/Number")]
         public string SeriesTitle { get; set; }
 
-        public int Isbn { get; set; }
+        public string Isbn { get; set; }
 
         public int Rating { get; set; }
 

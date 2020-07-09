@@ -20,10 +20,11 @@ namespace Shelfish.Models.BookModels
         [Display(Name ="Author")]
         public string AuthorName { get; set; }
 
-        public int Isbn { get; set; }
+        public string Isbn { get; set; }
 
         public int Rating { get; set; }
 
+        [Display(Name ="Genre")]
         public Genre Genre { get; set; }
 
         public string Language { get; set; }

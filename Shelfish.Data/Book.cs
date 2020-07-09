@@ -23,7 +23,7 @@ namespace Shelfish.Data
         public string SeriesTitle { get; set; }
 
         [Required]
-        public int Isbn { get; set; }
+        public string Isbn { get; set; }
 
         [Required]
         public int Rating { get; set; }
@@ -50,41 +50,97 @@ namespace Shelfish.Data
     public enum Genre
     {
         Fiction,
+
+        [Display(Name = "Non-Fiction")]
         Nonfiction,
+
+        [Display(Name = "Sci-Fi/Fantasy")]
         SciFiFantasy,
+
+        Horror,
+
         Romance,
+
+        [Display(Name = "Role-playing Games")]
         RolePlayingGames,
+
+        [Display(Name = "Video Games")]
         VideoGames,
+
+        [Display(Name = "Graphic Novels"]
         GraphicNovel,
+
         Manga,
+
         History,
+
+        [Display(Name ="Computers & Programming")]
         ComputersAndProgramming,
+
         Business,
+
         Reference,
+
         Biography,
-        ScienceAndTechnology,
+
+        [Display(Name ="Math & Science")]
+        ScienceAndMath,
+
         Cooking,
+
         Religion,
+
         Philosophy,
+
+        [Display(Name ="Sports & The Outdoors")]
         SportsAndOutdoors,
+
+        [Display(Name ="Self-help")]
         SelfHelp,
+
         Parenting,
+
+        [Display(Name ="Art & Architecture")]
         ArtAndArchitecture,
+
         Photography,
+
         Health,
+
         Medicine,
+
+        [Display(Name ="Picture Books")]
         PictureBooks,
+
+        [Display(Name ="Young Reader")]
         YoungReader,
+
+        [Display(Name = "YA Fiction")]
         YAFiction,
+
+        [Display(Name ="YA Sci-Fi/Fantasy")]
         YASciFiFantasy,
+
+        [Display(Name ="YA Romance")]
         YARomance,
+
+        [Display(Name ="YA Non-fiction")]
         YANonfiction,
+
         Humor,
+
         Travel,
+
         Languages,
-        HobbiesAndCollecting,
+
+        Collecting,
+
+        [Display(Name ="Social Sciences & Culture")]
         SocialSciences,
+
+        [Display(Name ="Current Affairs")]
         CurrentAffairs,
+
         Nature
 
 

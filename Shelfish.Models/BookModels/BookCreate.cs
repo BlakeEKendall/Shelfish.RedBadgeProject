@@ -26,12 +26,13 @@ namespace Shelfish.Models.BookModels
 
 
         [Required]
+        [Display(Name ="Author Id")]
         public int AuthorId { get; set; }
 
 
         [Required]
-        [StringLength(13, ErrorMessage = "ISBN must contain 13 characters.")]
-        public int Isbn { get; set; }
+        [StringLength(13, MinimumLength = 13, ErrorMessage = "ISBN must contain 13 characters.")]
+        public string Isbn { get; set; }
 
 
         [Required]

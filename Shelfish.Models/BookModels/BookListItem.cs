@@ -17,7 +17,7 @@ namespace Shelfish.Models.BookModels
 
         public string AuthorName { get; set; }
 
-        public int Isbn { get; set; }
+        public string Isbn { get; set; }
 
         
     }
