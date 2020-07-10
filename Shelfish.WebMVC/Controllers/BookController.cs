@@ -48,7 +48,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
-
+        // GET: Details
         public ActionResult Details(int id)
         {
             var svc = new BookService();
@@ -57,6 +57,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+        // GET: Edit
         public ActionResult Edit(int id)
         {
             BookDetail detail = GetBookService(id);
@@ -76,33 +77,32 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
-        
-
+        // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, BookEdit model)
+        public ActionResult Edit(int id, BookEdit bookToBeEdited)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return View(bookToBeEdited);
 
-            if (model.BookId != id)
+            if (bookToBeEdited.BookId != id)
             {
                 ModelState.AddModelError("", "ID does not match an existing item, please try again.");
-                return View(model);
+                return View(bookToBeEdited);
             }
 
             var service = new BookService();
 
-            if (service.UpdateBook(model))
+            if (service.UpdateBook(bookToBeEdited))
             {
                 TempData["SaveResult"] = "Your book was updated.";
                 return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("", "Your book could not be updated.");
-            return View(model);
+            return View(bookToBeEdited);
         }
 
-
+        // GET: Delete
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
@@ -111,7 +111,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(bookToBeDeleted);
         }
 
-
+        // POST: Delete
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
