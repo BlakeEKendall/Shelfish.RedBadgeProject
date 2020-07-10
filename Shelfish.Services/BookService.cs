@@ -102,5 +102,20 @@ namespace Shelfish.Services
             }
         }
 
+        public bool DeleteBook(int bookId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var bookToDelete =
+                    ctx
+                        .Books
+                        .Single(e => e.BookId == bookId);
+
+                ctx.Books.Remove(bookToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
     }
 }

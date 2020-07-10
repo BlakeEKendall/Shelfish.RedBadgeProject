@@ -1,4 +1,5 @@
-﻿using Shelfish.Models.BookModels;
+﻿using Shelfish.Data;
+using Shelfish.Models.BookModels;
 using Shelfish.Services;
 using System;
 using System.Collections.Generic;
@@ -58,8 +59,7 @@ namespace Shelfish.WebMVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            var service = new BookService();
-            var detail = service.GetBookById(id);
+            BookDetail detail = GetBookService(id);
             var model =
                 new BookEdit
                 {
@@ -76,6 +76,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -85,7 +86,7 @@ namespace Shelfish.WebMVC.Controllers
 
             if (model.BookId != id)
             {
-                ModelState.AddModelError("", "Id does not match an existing item, please try again.");
+                ModelState.AddModelError("", "ID does not match an existing item, please try again.");
                 return View(model);
             }
 
@@ -99,6 +100,38 @@ namespace Shelfish.WebMVC.Controllers
 
             ModelState.AddModelError("", "Your book could not be updated.");
             return View(model);
+        }
+
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            BookDetail bookToBeDeleted = GetBookService(id);
+
+            return View(bookToBeDeleted);
+        }
+
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = new BookService();
+
+            service.DeleteBook(id);
+
+            TempData["SaveResult"] = "Your book was deleted";
+
+            return RedirectToAction("Index");
+        }
+
+
+        private static BookDetail GetBookService(int id)
+        {
+            var service = new BookService();
+            var detail = service.GetBookById(id);
+            return detail;
         }
     }
 }
