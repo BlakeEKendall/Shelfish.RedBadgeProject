@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shelfish.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,15 @@ namespace Shelfish.WebMVC.Controllers
     {
         // GET: Audiobook
         public ActionResult Index()
+        {
+            var service = new AudiobookService();
+            var model = service.GetAudiobooks();
+
+            return View(model);
+        }
+
+        // GET: AudiobookCreate
+        public ActionResult Create()
         {
             return View();
         }
