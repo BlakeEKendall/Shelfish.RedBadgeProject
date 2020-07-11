@@ -3,31 +3,29 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initCreate : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Book",
+                "dbo.Audiobook",
                 c => new
                     {
-                        BookId = c.Int(nullable: false, identity: true),
+                        AudiobookId = c.Int(nullable: false, identity: true),
                         Title = c.String(nullable: false),
                         SeriesTitle = c.String(),
-                        Isbn = c.Int(nullable: false),
+                        Isbn = c.String(nullable: false),
                         Rating = c.Int(nullable: false),
                         Genre = c.Int(nullable: false),
                         Language = c.String(nullable: false),
                         Publisher = c.String(nullable: false),
-                        IsEbook = c.Boolean(nullable: false),
+                        NarratorName = c.String(nullable: false),
+                        AudioFormat = c.Int(nullable: false),
+                        IsAbridged = c.Boolean(nullable: false),
                         AuthorId = c.Int(nullable: false),
-                        NarratorName = c.String(),
-                        AudioFormat = c.Int(),
-                        IsAbridged = c.Boolean(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                         Bookshelf_ShelfId = c.Int(),
                     })
-                .PrimaryKey(t => t.BookId)
+                .PrimaryKey(t => t.AudiobookId)
                 .ForeignKey("dbo.Author", t => t.AuthorId, cascadeDelete: true)
                 .ForeignKey("dbo.Bookshelf", t => t.Bookshelf_ShelfId)
                 .Index(t => t.AuthorId)
@@ -42,6 +40,28 @@
                         CountryName = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.AuthorId);
+            
+            CreateTable(
+                "dbo.Book",
+                c => new
+                    {
+                        BookId = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
+                        SeriesTitle = c.String(),
+                        Isbn = c.String(nullable: false),
+                        Rating = c.Int(nullable: false),
+                        Genre = c.Int(nullable: false),
+                        Language = c.String(nullable: false),
+                        Publisher = c.String(nullable: false),
+                        IsEbook = c.Boolean(nullable: false),
+                        AuthorId = c.Int(nullable: false),
+                        Bookshelf_ShelfId = c.Int(),
+                    })
+                .PrimaryKey(t => t.BookId)
+                .ForeignKey("dbo.Author", t => t.AuthorId, cascadeDelete: true)
+                .ForeignKey("dbo.Bookshelf", t => t.Bookshelf_ShelfId)
+                .Index(t => t.AuthorId)
+                .Index(t => t.Bookshelf_ShelfId);
             
             CreateTable(
                 "dbo.Bookshelf",
@@ -149,6 +169,8 @@
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
             DropForeignKey("dbo.Book", "Bookshelf_ShelfId", "dbo.Bookshelf");
+            DropForeignKey("dbo.Audiobook", "Bookshelf_ShelfId", "dbo.Bookshelf");
+            DropForeignKey("dbo.Audiobook", "AuthorId", "dbo.Author");
             DropForeignKey("dbo.Book", "AuthorId", "dbo.Author");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
@@ -156,6 +178,8 @@
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.Book", new[] { "Bookshelf_ShelfId" });
             DropIndex("dbo.Book", new[] { "AuthorId" });
+            DropIndex("dbo.Audiobook", new[] { "Bookshelf_ShelfId" });
+            DropIndex("dbo.Audiobook", new[] { "AuthorId" });
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
@@ -163,8 +187,9 @@
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Review");
             DropTable("dbo.Bookshelf");
-            DropTable("dbo.Author");
             DropTable("dbo.Book");
+            DropTable("dbo.Author");
+            DropTable("dbo.Audiobook");
         }
     }
 }

@@ -62,13 +62,9 @@
     <Compile Include="Book.cs" />
     <Compile Include="Bookshelf.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202007092206533_InitialCreate.cs" />
-    <Compile Include="Migrations\202007092206533_InitialCreate.designer.cs">
-      <DependentUpon>202007092206533_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202007092316288_UpdatedBookEntity.cs" />
-    <Compile Include="Migrations\202007092316288_UpdatedBookEntity.designer.cs">
-      <DependentUpon>202007092316288_UpdatedBookEntity.cs</DependentUpon>
+    <Compile Include="Migrations\202007111451289_initCreate.cs" />
+    <Compile Include="Migrations\202007111451289_initCreate.designer.cs">
+      <DependentUpon>202007111451289_initCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,11 +75,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007092206533_InitialCreate.resx">
-      <DependentUpon>202007092206533_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202007092316288_UpdatedBookEntity.resx">
-      <DependentUpon>202007092316288_UpdatedBookEntity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007111451289_initCreate.resx">
+      <DependentUpon>202007111451289_initCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

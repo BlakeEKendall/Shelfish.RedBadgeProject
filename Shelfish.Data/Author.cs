@@ -20,5 +20,6 @@ namespace Shelfish.Data
         public string CountryName { get; set; }
 
         public ICollection<Book> Books { get; set; }
+        public ICollection<Audiobook> Audiobooks { get; set; }
     }
 }

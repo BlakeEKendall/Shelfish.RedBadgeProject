@@ -49,7 +49,7 @@ namespace Shelfish.Data
 
     public enum Genre
     {
-        Fiction,
+        Fiction =1,
 
         [Display(Name = "Non-Fiction")]
         Nonfiction,

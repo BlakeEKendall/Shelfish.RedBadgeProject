@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Shelfish.Data.ApplicationDbContext";
         }
 
         protected override void Seed(Shelfish.Data.ApplicationDbContext context)

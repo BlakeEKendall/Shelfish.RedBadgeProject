@@ -32,6 +32,6 @@ namespace Shelfish.Data
 
         //Do I need a public int BookId property? or a public virtual Book Book property?
         public virtual ICollection<Book> Books { get; set; }
-
+        public virtual ICollection<Audiobook> Audiobooks { get; set; }
     }
 }
