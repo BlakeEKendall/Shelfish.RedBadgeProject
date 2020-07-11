@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudiobookModels\AudiobookCreate.cs" />
+    <Compile Include="AudiobookModels\AudiobookDetail.cs" />
     <Compile Include="AudiobookModels\AudiobookListItem.cs" />
     <Compile Include="AuthorModels\AuthorCreate.cs" />
     <Compile Include="AuthorModels\AuthorDetail.cs" />

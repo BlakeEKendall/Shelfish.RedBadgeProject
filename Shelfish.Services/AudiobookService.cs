@@ -57,5 +57,32 @@ namespace Shelfish.Services
                 return query.ToArray();
             }
         }
+
+        public AudiobookDetail GetAudiobookById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Audiobooks
+                        .Single(e => e.AudiobookId == id);
+                return
+                    new AudiobookDetail
+                    {
+                        AudiobookId = entity.AudiobookId,
+                        Title = entity.Title,
+                        SeriesTitle = entity.SeriesTitle,
+                        AuthorName = entity.Author.Name,
+                        Isbn = entity.Isbn,
+                        Rating = entity.Rating,
+                        Genre = entity.Genre,
+                        Language = entity.Language,
+                        Publisher = entity.Publisher,
+                        NarratorName = entity.NarratorName,
+                        AudioFormat = entity.AudioFormat,
+                        IsAbridged = entity.IsAbridged
+                    };
+            }
+        }
     }
 }

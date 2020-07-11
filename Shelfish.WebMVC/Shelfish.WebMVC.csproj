@@ -360,6 +360,7 @@
     <Content Include="Views\Book\Delete.cshtml" />
     <Content Include="Views\Audiobook\Index.cshtml" />
     <Content Include="Views\Audiobook\Create.cshtml" />
+    <Content Include="Views\Audiobook\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
