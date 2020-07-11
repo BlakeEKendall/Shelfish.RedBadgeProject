@@ -60,9 +60,9 @@ namespace Shelfish.WebMVC.Controllers
         {
             AudiobookDetail detail = GetAudiobookService(id);
             var model =
-                new BookEdit
+                new AudiobookEdit
                 {
-                    BookId = detail.BookId,
+                    AudiobookId = detail.AudiobookId,
                     Title = detail.Title,
                     SeriesTitle = detail.SeriesTitle,
                     Isbn = detail.Isbn,
@@ -80,33 +80,33 @@ namespace Shelfish.WebMVC.Controllers
         // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, BookEdit bookToBeEdited)
+        public ActionResult Edit(int id, AudiobookEdit audiobookToBeEdited)
         {
-            if (!ModelState.IsValid) return View(bookToBeEdited);
+            if (!ModelState.IsValid) return View(audiobookToBeEdited);
 
-            if (bookToBeEdited.BookId != id)
+            if (audiobookToBeEdited.AudiobookId != id)
             {
                 ModelState.AddModelError("", "ID does not match an existing item, please try again.");
-                return View(bookToBeEdited);
+                return View(audiobookToBeEdited);
             }
 
-            var service = new BookService();
+            var service = new AudiobookService();
 
-            if (service.UpdateBook(bookToBeEdited))
+            if (service.UpdateAudiobook(audiobookToBeEdited))
             {
-                TempData["SaveResult"] = "Your book was updated.";
+                TempData["SaveResult"] = "Your audiobook was updated.";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Your book could not be updated.");
-            return View(bookToBeEdited);
+            ModelState.AddModelError("", "Your audiobook could not be updated.");
+            return View(audiobookToBeEdited);
         }
 
         // GET: Delete
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            BookDetail bookToBeDeleted = GetBookService(id);
+            AudiobookDetail bookToBeDeleted = GetAudiobookService(id);
 
             return View(bookToBeDeleted);
         }
@@ -117,11 +117,11 @@ namespace Shelfish.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)
         {
-            var service = new BookService();
+            var service = new AudiobookService();
 
-            service.DeleteBook(id);
+            service.DeleteAudiobook(id);
 
-            TempData["SaveResult"] = "Your book was deleted";
+            TempData["SaveResult"] = "Your audiobook was deleted";
 
             return RedirectToAction("Index");
         }

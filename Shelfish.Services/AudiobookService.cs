@@ -84,5 +84,44 @@ namespace Shelfish.Services
                     };
             }
         }
+
+        public bool UpdateAudiobook(AudiobookEdit audiobookToBeUpdated)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Audiobooks
+                        .Single(e => e.AudiobookId == audiobookToBeUpdated.AudiobookId);
+
+                entity.Title = audiobookToBeUpdated.Title;
+                entity.SeriesTitle = audiobookToBeUpdated.SeriesTitle;
+                entity.Isbn = audiobookToBeUpdated.Isbn;
+                entity.Rating = audiobookToBeUpdated.Rating;
+                entity.Genre = audiobookToBeUpdated.Genre;
+                entity.Language = audiobookToBeUpdated.Language;
+                entity.Publisher = audiobookToBeUpdated.Publisher;
+                entity.NarratorName = audiobookToBeUpdated.NarratorName;
+                entity.AudioFormat = audiobookToBeUpdated.AudioFormat;
+                entity.IsAbridged = audiobookToBeUpdated.IsAbridged;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteAudiobook(int audiobookId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var audiobookToDelete =
+                    ctx
+                        .Audiobooks
+                        .Single(e => e.AudiobookId == audiobookId);
+
+                ctx.Audiobooks.Remove(audiobookToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
