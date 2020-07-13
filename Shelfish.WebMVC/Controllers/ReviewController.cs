@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shelfish.Models.ReviewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,24 @@ namespace Shelfish.WebMVC.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        // GET: Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ReviewCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(model);
         }
     }
 }
