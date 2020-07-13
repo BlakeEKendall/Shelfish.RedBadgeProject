@@ -35,5 +35,28 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public IEnumerable<ReviewListItem> GetReviews()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Reviews
+                        .Where(e => e.UserId == _userId)
+                        .Select(
+                            e =>
+                                new ReviewListItem
+                                {
+                                    ReviewId = e.ReviewId,
+                                    Title = e.Title,
+                                    BookTitle = e.Book.Title,
+                                    CreatedUtc = e.CreatedUtc
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
     }
 }

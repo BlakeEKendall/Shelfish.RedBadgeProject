@@ -364,6 +364,7 @@
     <Content Include="Views\Audiobook\Edit.cshtml" />
     <Content Include="Views\Audiobook\Delete.cshtml" />
     <Content Include="Views\Review\Create.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

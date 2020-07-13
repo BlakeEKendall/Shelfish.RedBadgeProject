@@ -12,6 +12,7 @@ namespace Shelfish.Models.ReviewModels
     {
         [Display(Name ="Review ID")]
         public int ReviewId { get; set; }
+
         public string Title { get; set; }
         
         [Display(Name ="Book Reviewed")]
