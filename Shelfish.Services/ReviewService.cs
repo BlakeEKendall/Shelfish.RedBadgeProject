@@ -58,5 +58,26 @@ namespace Shelfish.Services
                 return query.ToArray();
             }
         }
+
+        public ReviewDetail GetReviewById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Reviews
+                        .Single(e => e.ReviewId == id && e.UserId == _userId);
+                return
+                    new ReviewDetail
+                    {
+                        ReviewId = entity.ReviewId,
+                        Title = entity.Title,
+                        BookTitle = entity.Book.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
     }
 }

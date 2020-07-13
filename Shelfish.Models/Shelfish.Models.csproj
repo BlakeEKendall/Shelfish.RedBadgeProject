@@ -72,6 +72,7 @@
     <Compile Include="BookshelfModels\BookshelfListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewModels\ReviewCreate.cs" />
+    <Compile Include="ReviewModels\ReviewDetail.cs" />
     <Compile Include="ReviewModels\ReviewListItem.cs" />
   </ItemGroup>
   <ItemGroup>
