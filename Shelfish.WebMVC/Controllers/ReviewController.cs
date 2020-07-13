@@ -22,11 +22,13 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+
         // GET: Create
         public ActionResult Create()
         {
             return View();
         }
+
 
         // POST: Create
         [HttpPost]
@@ -48,6 +50,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+
         // GET: Details
         public ActionResult Details(int id)
         {
@@ -55,6 +58,22 @@ namespace Shelfish.WebMVC.Controllers
             var model = svc.GetReviewById(id);
 
             return View(model);
+        }
+
+
+        // EDIT
+        public ActionResult Edit(int id)
+        {
+            var service = CreateReviewService();
+            var reviewToBeEdited = service.GetReviewById(id);
+            var updatedReview =
+                new ReviewEdit
+                {
+                    ReviewId = reviewToBeEdited.ReviewId,
+                    Title = reviewToBeEdited.Title,
+                    Content = reviewToBeEdited.Content
+                };
+            return View(updatedReview);
         }
 
 

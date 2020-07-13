@@ -79,5 +79,22 @@ namespace Shelfish.Services
                     };
             }
         }
+
+        public bool UpdateReview(ReviewEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var reviewToUpdate =
+                    ctx
+                        .Reviews
+                        .Single(e => e.ReviewId == model.ReviewId && e.UserId == _userId);
+
+                reviewToUpdate.Title = model.Title;
+                reviewToUpdate.Content = model.Content;
+                reviewToUpdate.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
