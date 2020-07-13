@@ -57,11 +57,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudiobookModels\AudiobookCreate.cs" />
+    <Compile Include="AudiobookModels\AudiobookDetail.cs" />
+    <Compile Include="AudiobookModels\AudiobookEdit.cs" />
+    <Compile Include="AudiobookModels\AudiobookListItem.cs" />
+    <Compile Include="AuthorModels\AuthorCreate.cs" />
+    <Compile Include="AuthorModels\AuthorDetail.cs" />
+    <Compile Include="AuthorModels\AuthorEdit.cs" />
+    <Compile Include="AuthorModels\AuthorListItem.cs" />
+    <Compile Include="BookModels\BookCreate.cs" />
+    <Compile Include="BookModels\BookDetail.cs" />
+    <Compile Include="BookModels\BookEdit.cs" />
+    <Compile Include="BookModels\BookListItem.cs" />
+    <Compile Include="BookshelfModels\BookshelfListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewModels\ReviewCreate.cs" />
+    <Compile Include="ReviewModels\ReviewListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Shelfish.Data\Shelfish.Data.csproj">
+      <Project>{04165C97-6918-4A11-A57B-13623031E8EF}</Project>
+      <Name>Shelfish.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
