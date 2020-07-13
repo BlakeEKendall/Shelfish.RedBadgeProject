@@ -96,5 +96,20 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteReview(int reviewId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var reviewToDelete =
+                    ctx
+                        .Reviews
+                        .Single(e => e.ReviewId == reviewId && e.UserId == _userId);
+
+                ctx.Reviews.Remove(reviewToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
