@@ -70,6 +70,14 @@
     <Compile Include="Migrations\202007132230329_addedForeignKeyToReview.designer.cs">
       <DependentUpon>202007132230329_addedForeignKeyToReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007142132465_updatedBookshelfEntity.cs" />
+    <Compile Include="Migrations\202007142132465_updatedBookshelfEntity.designer.cs">
+      <DependentUpon>202007142132465_updatedBookshelfEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007142143093_updatedAuthorEntityListNames.cs" />
+    <Compile Include="Migrations\202007142143093_updatedAuthorEntityListNames.designer.cs">
+      <DependentUpon>202007142143093_updatedAuthorEntityListNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Review.cs" />
@@ -84,6 +92,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007132230329_addedForeignKeyToReview.resx">
       <DependentUpon>202007132230329_addedForeignKeyToReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007142132465_updatedBookshelfEntity.resx">
+      <DependentUpon>202007142132465_updatedBookshelfEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007142143093_updatedAuthorEntityListNames.resx">
+      <DependentUpon>202007142143093_updatedAuthorEntityListNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

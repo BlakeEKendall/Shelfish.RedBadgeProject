@@ -19,7 +19,7 @@ namespace Shelfish.Data
         [Required]
         public string CountryName { get; set; }
 
-        public ICollection<Book> Books { get; set; }
-        public ICollection<Audiobook> Audiobooks { get; set; }
+        public ICollection<Book> AuthorBooks { get; set; }
+        public ICollection<Audiobook> AuthorAudiobooks { get; set; }
     }
 }

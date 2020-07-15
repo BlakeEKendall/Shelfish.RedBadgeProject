@@ -69,6 +69,7 @@
     <Compile Include="BookModels\BookDetail.cs" />
     <Compile Include="BookModels\BookEdit.cs" />
     <Compile Include="BookModels\BookListItem.cs" />
+    <Compile Include="BookshelfModels\BookshelfCreate.cs" />
     <Compile Include="BookshelfModels\BookshelfListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewModels\ReviewCreate.cs" />
