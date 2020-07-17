@@ -3,7 +3,9 @@ using Shelfish.Models.BookshelfModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -44,6 +46,9 @@ namespace Shelfish.Services
 
             using (var ctx = new ApplicationDbContext())
             {
+
+                
+
                 ctx.Bookshelves.Add(bookshelfToCreate);
                 return ctx.SaveChanges() == 1;
             }
@@ -109,6 +114,21 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteBookshelf(int shelfId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfToDelete =
+                    ctx
+                        .Bookshelves
+                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                ctx.Bookshelves.Remove(shelfToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 
 
@@ -118,16 +138,14 @@ namespace Shelfish.Services
     //Possible ways to set up books as SelectListItems to populate dropdownlists. May need to put in separate class/view model
     public class BookHelper
     {
-        private readonly List<Book> _books;
-
-        //[Display(Name = "Book to Add")]
-        //public int SelectedBookId { get; set; }
+        // BookService service = new BookService();
+        // var bookList = service.GetBooks();
 
         public IEnumerable<SelectListItem> BookItems
         {
             get
             {
-                var allBooks = _books.Select(b => new SelectListItem
+                var allBooks = bookList.Select(b => new SelectListItem
                 {
                     Value = b.BookId.ToString(),
                     Text = b.Title
