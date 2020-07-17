@@ -27,19 +27,20 @@ namespace Shelfish.Services
             //    var BookList = ctx.Books.ToList();
             //    foreach (Book book in BookList)
             //    {
-                    
+            //        var 
             //    }
             //}
 
-                var bookshelfToCreate =
+            var bookshelfToCreate =
                 new Bookshelf()
                 {
                     UserId = _userId,
                     ShelfName = model.ShelfName,
-                    //BooksOnShelf = model.BooksOnShelf,
+                    BooksOnShelf = model.BooksOnShelf,
                     //TotalBooks = BooksOnShelf.Count(),
                     CreatedUtc = DateTimeOffset.Now
                 };
+            
 
             using (var ctx = new ApplicationDbContext())
             {
@@ -47,15 +48,80 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public IEnumerable<BookshelfListItem> GetBookshelves()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Bookshelves
+                        .Where(e => e.UserId == _userId)
+                        .Select(
+                            e =>
+                                new BookshelfListItem
+                                {
+                                    ShelfId = e.ShelfId,
+                                    ShelfName = e.ShelfName,
+                                    TotalBooks = e.TotalBooks,
+                                    CreatedUtc = e.CreatedUtc
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
+        public BookshelfDetail GetBookshelfById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Bookshelves
+                        .Single(e => e.ShelfId == id && e.UserId == _userId);
+                return
+                    new BookshelfDetail
+                    {
+                        ShelfId = entity.ShelfId,
+                        ShelfName = entity.ShelfName,
+                        TotalBooks = entity.TotalBooks,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc,
+                        BooksOnShelf = entity.BooksOnShelf
+                    };
+            }
+        }
+
+        public bool UpdateBookshelf(BookshelfEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfToUpdate =
+                    ctx
+                        .Bookshelves
+                        .Single(e => e.ShelfId == model.ShelfId && e.UserId == _userId);
+
+                shelfToUpdate.ShelfName = model.ShelfName;
+                shelfToUpdate.BooksOnShelf = model.BooksOnSHelf;
+                shelfToUpdate.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
+
+
+
+
 
     //Possible ways to set up books as SelectListItems to populate dropdownlists. May need to put in separate class/view model
     public class BookHelper
     {
         private readonly List<Book> _books;
 
-        [Display(Name = "Book to Add")]
-        public int SelectedBookId { get; set; }
+        //[Display(Name = "Book to Add")]
+        //public int SelectedBookId { get; set; }
 
         public IEnumerable<SelectListItem> BookItems
         {

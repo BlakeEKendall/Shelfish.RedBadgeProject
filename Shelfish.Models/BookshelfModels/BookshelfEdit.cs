@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Shelfish.Models.BookshelfModels
 {
-    public class BookshelfCreate
+    public class BookshelfEdit
     {
-        [Required]
-        [MinLength(2, ErrorMessage = "Title must contain at least 2 characters.")]
-        [MaxLength(100, ErrorMessage = "There are too many characters in this field.")]
+        [Display(Name = "Shelf ID")]
+        public int ShelfId { get; set; }
+
         [Display(Name ="Shelf Name")]
         public string ShelfName { get; set; }
 
-        public virtual ICollection<Book> BooksOnShelf { get; set; }
+        public virtual ICollection<Book> BooksOnSHelf { get; set; }
     }
 }

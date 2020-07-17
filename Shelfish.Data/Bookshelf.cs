@@ -24,7 +24,12 @@ namespace Shelfish.Data
         public DateTimeOffset? ModifiedUtc { get; set; }
 
         [Required]
-        public int TotalBooks { get; set; }
+        public int TotalBooks {
+            get
+            {
+                return BooksOnShelf.Count();
+            }
+        }
 
         
 
