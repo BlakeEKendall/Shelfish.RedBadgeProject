@@ -16,6 +16,5 @@ namespace Shelfish.Models.BookshelfModels
         [Display(Name ="Shelf Name")]
         public string ShelfName { get; set; }
 
-        public virtual ICollection<Book> BooksOnSHelf { get; set; }
     }
 }

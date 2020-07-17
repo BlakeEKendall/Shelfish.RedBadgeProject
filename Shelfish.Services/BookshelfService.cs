@@ -1,4 +1,5 @@
 ﻿using Shelfish.Data;
+using Shelfish.Models.BookModels;
 using Shelfish.Models.BookshelfModels;
 using System;
 using System.Collections.Generic;
@@ -23,26 +24,14 @@ namespace Shelfish.Services
 
         public bool CreateBookshelf(BookshelfCreate model)
         {
-            //using (var ctx = new ApplicationDbContext())
-            //{
-
-            //    var BookList = ctx.Books.ToList();
-            //    foreach (Book book in BookList)
-            //    {
-            //        var 
-            //    }
-            //}
 
             var bookshelfToCreate =
                 new Bookshelf()
                 {
                     UserId = _userId,
                     ShelfName = model.ShelfName,
-                    BooksOnShelf = model.BooksOnShelf,
-                    //TotalBooks = BooksOnShelf.Count(),
                     CreatedUtc = DateTimeOffset.Now
                 };
-            
 
             using (var ctx = new ApplicationDbContext())
             {
@@ -52,6 +41,32 @@ namespace Shelfish.Services
                 ctx.Bookshelves.Add(bookshelfToCreate);
                 return ctx.SaveChanges() == 1;
             }
+        }
+
+        public bool AddBookToShelf(int bookId, int shelfId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                        ctx
+                            .Books
+                            .Single(e => e.BookId == bookId);
+                var shelfToAdd =
+                    ctx
+                        .Bookshelves
+                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+                shelfToAdd.BooksOnShelf.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
+            // From BookshelfDetail page, all info listed. Hit button to add book, want to pass ShelfId into next view with the dropdown. Select book from dropdown, 
+            //Data passed into dropdownlist to populate is the BOokId. Keep both Ids, and pass into AddToShelf method.
+            // Use hiddenfor tag to pass data to view without showing it. 
+
+            // look @ ViewBags to populate DropDownLists? passing data to the view.
+            // Made new SelectList, 
+            // Ask Nick or Marty about this Saturday
+
+            //Will Need additional method here to Delete book from list!!
         }
 
         public IEnumerable<BookshelfListItem> GetBookshelves()
@@ -108,7 +123,6 @@ namespace Shelfish.Services
                         .Single(e => e.ShelfId == model.ShelfId && e.UserId == _userId);
 
                 shelfToUpdate.ShelfName = model.ShelfName;
-                shelfToUpdate.BooksOnShelf = model.BooksOnSHelf;
                 shelfToUpdate.ModifiedUtc = DateTimeOffset.UtcNow;
 
                 return ctx.SaveChanges() == 1;

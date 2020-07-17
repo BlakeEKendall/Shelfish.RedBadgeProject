@@ -57,6 +57,13 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
+        // Links on Details page can take me to Controls below.
+
+        // GET: BOOK & ADD TO LIST -- Needs its own view page as well --> Find and add book from dropdown
+
+        // POST: BOOK TO SHELF LIST -- Submits change, and return (RedirectToAction to GET: Details page after posted?)
+
+
         // GET: Edit
         public ActionResult Edit(int id)
         {
@@ -67,7 +74,6 @@ namespace Shelfish.WebMVC.Controllers
                 {
                     ShelfId = shelfToBeEdited.ShelfId,
                     ShelfName = shelfToBeEdited.ShelfName,
-                    BooksOnSHelf = shelfToBeEdited.BooksOnShelf
                 };
             return View(updatedBookshelf);
         }
