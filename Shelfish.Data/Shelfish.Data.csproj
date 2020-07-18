@@ -78,6 +78,10 @@
     <Compile Include="Migrations\202007142143093_updatedAuthorEntityListNames.designer.cs">
       <DependentUpon>202007142143093_updatedAuthorEntityListNames.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007181824225_editedBookshelfEntityForBookCount.cs" />
+    <Compile Include="Migrations\202007181824225_editedBookshelfEntityForBookCount.designer.cs">
+      <DependentUpon>202007181824225_editedBookshelfEntityForBookCount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Review.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007142143093_updatedAuthorEntityListNames.resx">
       <DependentUpon>202007142143093_updatedAuthorEntityListNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007181824225_editedBookshelfEntityForBookCount.resx">
+      <DependentUpon>202007181824225_editedBookshelfEntityForBookCount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
