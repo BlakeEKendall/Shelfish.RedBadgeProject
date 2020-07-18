@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNet.Identity;
+using Shelfish.Data;
 using Shelfish.Models.BookshelfModels;
 using Shelfish.Services;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.EnterpriseServices;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace Shelfish.WebMVC.Controllers
 {
@@ -62,6 +67,31 @@ namespace Shelfish.WebMVC.Controllers
         // GET: BOOK & ADD TO LIST -- Needs its own view page as well --> Find and add book from dropdown
 
         // POST: BOOK TO SHELF LIST -- Submits change, and return (RedirectToAction to GET: Details page after posted?)
+
+        // GET: BooksToAdd
+        public ActionResult AddBooks()
+        {
+            var ctx = new ApplicationDbContext();
+            ViewBag.BookList = new SelectList(ctx.Books, "BookId", "Title");
+            return View();
+        }
+
+        // POST: BooksToAdd
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBooks(int bookId, int shelfId)
+        {
+            var service = CreateBookshelfService();
+
+            if (!service.AddBookToShelf(bookId, shelfId))
+            {
+                TempData["SaveResult"] = "Your book was added to the shelf.";
+                return RedirectToAction("Details");
+            }
+
+            ModelState.AddModelError("", "Your book could not be added.");
+            return View();
+        } 
 
 
         // GET: Edit

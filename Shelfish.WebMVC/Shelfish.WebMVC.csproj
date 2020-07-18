@@ -373,6 +373,7 @@
     <Content Include="Views\Bookshelf\Details.cshtml" />
     <Content Include="Views\Bookshelf\Edit.cshtml" />
     <Content Include="Views\Bookshelf\Delete.cshtml" />
+    <Content Include="Views\Bookshelf\AddBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
