@@ -29,6 +29,7 @@ namespace Shelfish.Data
             {
                 return BooksOnShelf.Count();
             }
+            set => BooksOnShelf.Count();
         }
 
         
