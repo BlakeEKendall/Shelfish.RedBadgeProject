@@ -1,0 +1,98 @@
+﻿@model Shelfish.Models.BookshelfModels.BookshelfDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookshelfDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelfId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShelfId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShelfName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShelfName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalBooks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalBooks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedUtc)
+        </dd>
+
+    </dl>
+</div>
+
+
+@*This may change, but try this to see if will display books in detail view*@
+@if (Model.BooksOnShelf != null)
+{
+    <h3>Books On Shelf</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Book Id</th>
+            <th>Title</th>
+            <th>Author</th>
+        </tr>
+
+        @foreach (var item in Model.BooksOnShelf)
+        {
+            string selectedRow = "";
+            if (item.BookId == ViewBag.BookId)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { bookId = item.BookId })
+                </td>
+                <td>
+                    @item.BookId
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Author.Name
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ShelfId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
