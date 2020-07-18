@@ -52,6 +52,7 @@ namespace Shelfish.Data
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
+
         }
     }
 

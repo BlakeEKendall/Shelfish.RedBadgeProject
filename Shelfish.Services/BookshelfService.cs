@@ -72,6 +72,12 @@ namespace Shelfish.Services
                     ctx
                         .Bookshelves
                         .Single(e => e.ShelfId == id && e.UserId == _userId);
+
+                var query =
+                    ctx
+                    .Books
+                    .Include(a => a.Author);
+                    
                 return
                     new BookshelfDetail
                     {
@@ -101,21 +107,23 @@ namespace Shelfish.Services
             }
         }
 
-        public bool AddBookToShelf(int bookId, int shelfId)
+        //should I only pass in the bookId here?, and in controller pass in shelfId & use svc.GetBookShelf(shelfId) to find correct shelf to edit?
+        public bool AddBookToShelf(int shelfId, int bookId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var bookToAddToShelf =
-                        ctx
-                            .Books
-                            .Single(e => e.BookId == bookId);
-
                 var shelfToAddBookTo =
                     ctx
                         .Bookshelves
                         .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
 
+                var bookToAddToShelf =
+                        ctx
+                            .Books
+                            .Single(e => e.BookId == bookId);
+
                 shelfToAddBookTo.BooksOnShelf.Add(bookToAddToShelf);
+                shelfToAddBookTo.TotalBooks++;
                 return ctx.SaveChanges() == 1;
             }
             // From BookshelfDetail page, all info listed. Hit button to add book, want to pass ShelfId into next view with the dropdown. Select book from dropdown, 
@@ -130,7 +138,7 @@ namespace Shelfish.Services
             //Will Need additional method here to Delete book from list!!
         }
 
-        public bool DeleteBookFromShelf(int bookId, int shelfId)
+        public bool DeleteBookFromShelf(int shelfId, int bookId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -145,6 +153,7 @@ namespace Shelfish.Services
                     .Single(b => b.BookId == bookId);
 
                 shelfToRemoveBookFrom.BooksOnShelf.Remove(bookToBeDeletedFromShelf);
+                shelfToRemoveBookFrom.TotalBooks--;
                 return ctx.SaveChanges() == 1;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -23,14 +24,8 @@ namespace Shelfish.Data
 
         public DateTimeOffset? ModifiedUtc { get; set; }
 
-        [Required]
-        public int TotalBooks {
-            get
-            {
-                return BooksOnShelf.Count();
-            }
-            set => BooksOnShelf.Count();
-        }
+        [DefaultValue(0)]
+        public int TotalBooks { get; set; }
 
         
 

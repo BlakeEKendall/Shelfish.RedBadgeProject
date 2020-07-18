@@ -65,17 +65,19 @@ namespace Shelfish.WebMVC.Controllers
         // Links on Details page can take me to Controls below.
 
         // GET: BOOK & ADD TO LIST -- Needs its own view page as well --> Find and add book from dropdown
-
         // POST: BOOK TO SHELF LIST -- Submits change, and return (RedirectToAction to GET: Details page after posted?)
 
         // GET: BooksToAdd
-        public ActionResult AddBooks()
+        public ActionResult AddBooks(int id)
         {
-            var ctx = new ApplicationDbContext();
-            ViewBag.BookList = new SelectList(ctx.Books, "BookId", "Title");
-            return View();
+            var svc = CreateBookshelfService();
+            var model = svc.GetBookshelfById(id);
+            var books = new ApplicationDbContext().Books.ToList();
+            ViewBag.BookId = new SelectList(books, "BookId", "Title");
+            return View(model);
         }
 
+        //THis part is still not working: sometimes error says that dropdown contains no id/value? Even though I can see the dropdown list in the view just fine.
         // POST: BooksToAdd
         [HttpPost]
         [ValidateAntiForgeryToken]

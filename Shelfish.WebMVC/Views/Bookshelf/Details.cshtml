@@ -68,40 +68,44 @@
 @*This may change, but try this to see if will display books in detail view*@
 @if (Model.BooksOnShelf != null)
 {
-    <h3>Books On Shelf</h3>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Book ID</th>
-            <th>Title</th>
-            <th>Author</th>
-        </tr>
-
-        @foreach (var item in Model.BooksOnShelf)
-        {
-            string selectedRow = "";
-            if (item.BookId == ViewBag.BookId)
-            {
-                selectedRow = "success";
-            }
-            <tr class="@selectedRow">
-                <td>
-                    @Html.ActionLink("Select", "Index", new { bookId = item.BookId })
-                </td>
-                <td>
-                    @item.BookId
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.Author.Name
-                </td>
+    <div>
+        <h3>Books On Shelf</h3>
+        <table class="table">
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Author</th>
+                <th></th>
             </tr>
-        }
+                @foreach (var item in Model.BooksOnShelf)
+                {
+                    <tr>
+                        <td>
+                            @item.BookId
+                        </td>
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @item.Isbn
+                        </td>
+                        <td>
+                            @*@item.Author.Name*@
+                        </td>
+                        <td>
+                            @Html.ActionLink("Remove", "DeleteBook", new { bookId = item.BookId })
+                        </td>
+                    </tr>
+                }
 
-    </table>
+        </table>
+    </div>
 }
+
+<p>
+    @Html.ActionLink("Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })
+</p>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ShelfId }) |

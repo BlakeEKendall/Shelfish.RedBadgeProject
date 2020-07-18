@@ -1,23 +1,26 @@
-﻿
+﻿@model Shelfish.Models.BookshelfModels.BookshelfDetail
+
 @{
     ViewBag.Title = "AddBooks";
 }
 
 <h2>AddBooks</h2>
-
+<hr />
+@Html.DisplayFor(model => model.ShelfName)
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Books</h4>
+        <h4>Books To Add</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ShelfId)
 
         <div class="form-horizontal">
             <div class="form-group">
-                @Html.DropDownList("BookId", (IEnumerable<SelectListItem>)ViewBag.BookList, "--Select--", new { @class = "form-control" }))
+                @Html.DropDownList("BookId", (IEnumerable<SelectListItem>)ViewBag.BookId, "--Select--", new { @class = "form-control" })
             </div>
         </div>
 
@@ -29,11 +32,10 @@
     </div>
 }
 
+<div>
+    @Html.ActionLink("Back to Details", "Details")
+</div>
 
-    <div>
-        @Html.ActionLink("Back to Details", "Details")
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
