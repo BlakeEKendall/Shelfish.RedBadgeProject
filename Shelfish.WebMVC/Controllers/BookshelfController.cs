@@ -83,7 +83,7 @@ namespace Shelfish.WebMVC.Controllers
         {
             var service = CreateBookshelfService();
 
-            if (!service.AddBookToShelf(bookId, shelfId))
+            if (service.AddBookToShelf(bookId, shelfId))
             {
                 TempData["SaveResult"] = "Your book was added to the shelf.";
                 return RedirectToAction("Details");
