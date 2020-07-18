@@ -35,39 +35,11 @@ namespace Shelfish.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-
-                
-
                 ctx.Bookshelves.Add(bookshelfToCreate);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public bool AddBookToShelf(int bookId, int shelfId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                        ctx
-                            .Books
-                            .Single(e => e.BookId == bookId);
-                var shelfToAdd =
-                    ctx
-                        .Bookshelves
-                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
-                shelfToAdd.BooksOnShelf.Add(entity);
-                return ctx.SaveChanges() == 1;
-            }
-            // From BookshelfDetail page, all info listed. Hit button to add book, want to pass ShelfId into next view with the dropdown. Select book from dropdown, 
-            //Data passed into dropdownlist to populate is the BOokId. Keep both Ids, and pass into AddToShelf method.
-            // Use hiddenfor tag to pass data to view without showing it. 
-
-            // look @ ViewBags to populate DropDownLists? passing data to the view.
-            // Made new SelectList, 
-            // Ask Nick or Marty about this Saturday
-
-            //Will Need additional method here to Delete book from list!!
-        }
 
         public IEnumerable<BookshelfListItem> GetBookshelves()
         {
@@ -129,6 +101,93 @@ namespace Shelfish.Services
             }
         }
 
+        public bool AddBookToShelf(int bookId, int shelfId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var bookToAddToShelf =
+                        ctx
+                            .Books
+                            .Single(e => e.BookId == bookId);
+
+                var shelfToAddBookTo =
+                    ctx
+                        .Bookshelves
+                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                shelfToAddBookTo.BooksOnShelf.Add(bookToAddToShelf);
+                return ctx.SaveChanges() == 1;
+            }
+            // From BookshelfDetail page, all info listed. Hit button to add book, want to pass ShelfId into next view with the dropdown. Select book from dropdown, 
+            //Data passed into dropdownlist to populate is the BOokId. Keep both Ids, and pass into AddToShelf method.
+            // Use hiddenfor tag to pass data to view without showing it. 
+
+            // look @ ViewBags to populate DropDownLists? passing data to the view.
+            // Made new SelectList, pass to view via ViewBag?
+            // Ask Nick or Marty about this Saturday if needed!
+
+
+            //Will Need additional method here to Delete book from list!!
+        }
+
+        public bool DeleteBookFromShelf(int bookId, int shelfId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfToRemoveBookFrom =
+                    ctx
+                    .Bookshelves
+                    .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                var bookToBeDeletedFromShelf =
+                    shelfToRemoveBookFrom
+                    .BooksOnShelf
+                    .Single(b => b.BookId == bookId);
+
+                shelfToRemoveBookFrom.BooksOnShelf.Remove(bookToBeDeletedFromShelf);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool AddAudiobookToShelf(int audioId, int shelfId)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var audiobookToAddToShelf =
+                    ctx
+                    .Audiobooks
+                    .Single(e => e.AudiobookId == audioId);
+
+                var shelfToAddAudiobookTo =
+                    ctx
+                    .Bookshelves
+                    .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                shelfToAddAudiobookTo.AudiobooksOnShelf.Add(audiobookToAddToShelf);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        
+        public bool DeleteAudiobookFromShelf(int audioId, int shelfId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfToRemoveBookFrom =
+                    ctx
+                    .Bookshelves
+                    .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                var audiobookToBeDeletedFromShelf =
+                    shelfToRemoveBookFrom
+                    .AudiobooksOnShelf
+                    .Single(a => a.AudiobookId == audioId);
+
+                shelfToRemoveBookFrom.AudiobooksOnShelf.Remove(audiobookToBeDeletedFromShelf);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
         public bool DeleteBookshelf(int shelfId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -155,17 +214,17 @@ namespace Shelfish.Services
         // BookService service = new BookService();
         // var bookList = service.GetBooks();
 
-        public IEnumerable<SelectListItem> BookItems
-        {
-            get
-            {
-                var allBooks = bookList.Select(b => new SelectListItem
-                {
-                    Value = b.BookId.ToString(),
-                    Text = b.Title
-                });
-                return allBooks;
-            }
-        }
+        //public IEnumerable<SelectListItem> BookItems
+        //{
+        //    get
+        //    {
+        //        var allBooks = bookList.Select(b => new SelectListItem
+        //        {
+        //            Value = b.BookId.ToString(),
+        //            Text = b.Title
+        //        });
+        //        return allBooks;
+        //    }
+        //}
     }
 }

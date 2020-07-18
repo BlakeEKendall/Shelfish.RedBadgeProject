@@ -25,6 +25,10 @@ namespace Shelfish.Models.BookshelfModels
         [Display(Name = "Modified")]
         public DateTimeOffset? ModifiedUtc { get; set; }
 
+        [Display(Name ="Books On Shelf")]
         public virtual ICollection<Book> BooksOnShelf { get; set; }
+
+        [Display(Name = "Audiobooks On Shelf")]
+        public virtual ICollection<Audiobook> AudiobooksOnShelf { get; set; }
     }
 }
