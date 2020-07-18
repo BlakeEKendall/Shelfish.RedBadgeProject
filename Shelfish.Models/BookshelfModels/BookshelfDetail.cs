@@ -1,40 +1,34 @@
-﻿using System;
+﻿using Shelfish.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shelfish.Data
+namespace Shelfish.Models.BookshelfModels
 {
-    public class Bookshelf
+    public class BookshelfDetail
     {
-        [Key]
+        [Display(Name = "Shelf ID")]
         public int ShelfId { get; set; }
 
-        [Required]
-        public Guid UserId { get; set; }
-
-        [Required]
+        [Display(Name = "Shelf Name")]
         public string ShelfName { get; set; }
 
-        [Required]
+        [Display(Name ="Total Books")]
+        public int TotalBooks { get; set; }
+
+        [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }
 
+        [Display(Name = "Modified")]
         public DateTimeOffset? ModifiedUtc { get; set; }
 
-        [Required]
-        public int TotalBooks {
-            get
-            {
-                return BooksOnShelf.Count();
-            }
-        }
-
-        
-
-        //Do I need a public int BookId property? or a public virtual Book Book property?
+        [Display(Name ="Books On Shelf")]
         public virtual ICollection<Book> BooksOnShelf { get; set; }
+
+        [Display(Name = "Audiobooks On Shelf")]
         public virtual ICollection<Audiobook> AudiobooksOnShelf { get; set; }
     }
 }

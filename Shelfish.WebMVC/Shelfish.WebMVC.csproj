@@ -364,6 +364,16 @@
     <Content Include="Views\Audiobook\Edit.cshtml" />
     <Content Include="Views\Audiobook\Delete.cshtml" />
     <Content Include="Views\Review\Create.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Review\Details.cshtml" />
+    <Content Include="Views\Review\Edit.cshtml" />
+    <Content Include="Views\Review\Delete.cshtml" />
+    <Content Include="Views\Bookshelf\Index.cshtml" />
+    <Content Include="Views\Bookshelf\Create.cshtml" />
+    <Content Include="Views\Bookshelf\Details.cshtml" />
+    <Content Include="Views\Bookshelf\Edit.cshtml" />
+    <Content Include="Views\Bookshelf\Delete.cshtml" />
+    <Content Include="Views\Bookshelf\AddBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

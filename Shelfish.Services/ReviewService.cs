@@ -35,5 +35,81 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public IEnumerable<ReviewListItem> GetReviews()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .Reviews
+                        .Where(e => e.UserId == _userId)
+                        .Select(
+                            e =>
+                                new ReviewListItem
+                                {
+                                    ReviewId = e.ReviewId,
+                                    Title = e.Title,
+                                    BookTitle = e.Book.Title,
+                                    CreatedUtc = e.CreatedUtc
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
+        public ReviewDetail GetReviewById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Reviews
+                        .Single(e => e.ReviewId == id && e.UserId == _userId);
+                return
+                    new ReviewDetail
+                    {
+                        ReviewId = entity.ReviewId,
+                        Title = entity.Title,
+                        BookTitle = entity.Book.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
+            }
+        }
+
+        public bool UpdateReview(ReviewEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var reviewToUpdate =
+                    ctx
+                        .Reviews
+                        .Single(e => e.ReviewId == model.ReviewId && e.UserId == _userId);
+
+                reviewToUpdate.Title = model.Title;
+                reviewToUpdate.Content = model.Content;
+                reviewToUpdate.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteReview(int reviewId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var reviewToDelete =
+                    ctx
+                        .Reviews
+                        .Single(e => e.ReviewId == reviewId && e.UserId == _userId);
+
+                ctx.Reviews.Remove(reviewToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
