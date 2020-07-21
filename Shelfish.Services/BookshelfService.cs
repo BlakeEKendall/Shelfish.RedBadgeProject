@@ -72,12 +72,9 @@ namespace Shelfish.Services
                     ctx
                         .Bookshelves
                         .Single(e => e.ShelfId == id && e.UserId == _userId);
-
-                var query =
-                    ctx
-                    .Books
-                    .Include(a => a.Author);
-                    
+                //TODO: Add Property to BookshelfDetail model that gets Authors or Authors.Name? SO that Detail View page able to access name and display properly in list of books added?
+                //And set that detail here when BookShelfDetail GetBookshelfById() is called?
+                
                 return
                     new BookshelfDetail
                     {
@@ -107,27 +104,51 @@ namespace Shelfish.Services
             }
         }
 
+        //TODO: Rewrite, now using new ADDBOOKTOSHELFVIEWMODEL model
+
         //should I only pass in the bookId here?, and in controller pass in shelfId & use svc.GetBookShelf(shelfId) to find correct shelf to edit?
-        public bool AddBookToShelf(int shelfId, int bookId)
+        public bool AddBookToShelf(AddBookToShelfViewModel model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var shelfToAddBookTo =
                     ctx
-                        .Bookshelves
-                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+                    .Bookshelves
+                    .Single(e => e.ShelfId == model.ShelfId && e.UserId == _userId);
+
+                //NOTE: These cause a problem somehow, caused an EntityValidation error. Commenting these out lets the controller continue, but the method still doesn't work right because I get a the 
+                //shelfToAddBookTo.ShelfName = model.ShelfName;
+                //shelfToAddBookTo.BooksOnShelf = model.BooksOnShelf;
 
                 var bookToAddToShelf =
-                        ctx
-                            .Books
-                            .Single(e => e.BookId == bookId);
+                    ctx
+                    .Books
+                    .Single(b => b.BookId == model.SelectedBookId);
+
+                bookToAddToShelf.BookId = model.SelectedBookId;
 
                 shelfToAddBookTo.BooksOnShelf.Add(bookToAddToShelf);
                 shelfToAddBookTo.TotalBooks++;
                 return ctx.SaveChanges() == 1;
+
+                //NOTE: Below is original code before new AddBookToSHelfViewModel class was created and used above!!
+                //var shelfToAddBookTo =
+                //    ctx
+                //        .Bookshelves
+                //        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                //var bookToAddToShelf =
+                //    ctx
+                //        .Books
+                //        .Single(e => e.BookId == bookId);
+
+                //shelfToAddBookTo.BooksOnShelf.Add(bookToAddToShelf);
+                //shelfToAddBookTo.TotalBooks++;
+                //return ctx.SaveChanges() == 1;
             }
+
             // From BookshelfDetail page, all info listed. Hit button to add book, want to pass ShelfId into next view with the dropdown. Select book from dropdown, 
-            //Data passed into dropdownlist to populate is the BOokId. Keep both Ids, and pass into AddToShelf method.
+            // Data passed into dropdownlist to populate is the BOokId. Keep both Ids, and pass into AddToShelf method.
             // Use hiddenfor tag to pass data to view without showing it. 
 
             // look @ ViewBags to populate DropDownLists? passing data to the view.
@@ -173,6 +194,7 @@ namespace Shelfish.Services
                     .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
 
                 shelfToAddAudiobookTo.AudiobooksOnShelf.Add(audiobookToAddToShelf);
+                shelfToAddAudiobookTo.TotalBooks++;
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -193,6 +215,7 @@ namespace Shelfish.Services
                     .Single(a => a.AudiobookId == audioId);
 
                 shelfToRemoveBookFrom.AudiobooksOnShelf.Remove(audiobookToBeDeletedFromShelf);
+                shelfToRemoveBookFrom.TotalBooks--;
                 return ctx.SaveChanges() == 1;
             }
         }

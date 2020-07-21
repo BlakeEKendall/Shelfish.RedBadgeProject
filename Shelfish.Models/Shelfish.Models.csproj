@@ -69,6 +69,7 @@
     <Compile Include="BookModels\BookDetail.cs" />
     <Compile Include="BookModels\BookEdit.cs" />
     <Compile Include="BookModels\BookListItem.cs" />
+    <Compile Include="BookshelfModels\AddBookToShelfViewModel.cs" />
     <Compile Include="BookshelfModels\BookshelfCreate.cs" />
     <Compile Include="BookshelfModels\BookshelfDetail.cs" />
     <Compile Include="BookshelfModels\BookshelfEdit.cs" />

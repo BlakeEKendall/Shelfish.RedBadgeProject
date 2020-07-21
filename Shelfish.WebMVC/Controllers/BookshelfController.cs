@@ -70,29 +70,89 @@ namespace Shelfish.WebMVC.Controllers
         // GET: BooksToAdd
         public ActionResult AddBooks(int id)
         {
+            //NOTE: The below code was working, but before adding the new AddBookToShelfViewModel. Keep for now while testing new implementation of new view model
+            //var svc = CreateBookshelfService();
+            //var model = svc.GetBookshelfById(id);
+            //var books = new ApplicationDbContext().Books.ToList();
+            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+            //return View(model);
+
             var svc = CreateBookshelfService();
             var model = svc.GetBookshelfById(id);
+            var bookshelfToAddBookTo =
+                new AddBookToShelfViewModel
+                {
+                    ShelfId = model.ShelfId,
+                    ShelfName = model.ShelfName
+                };
+            
             var books = new ApplicationDbContext().Books.ToList();
-            ViewBag.BookId = new SelectList(books, "BookId", "Title");
-            return View(model);
+            ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+            return View(bookshelfToAddBookTo);
         }
 
         //THis part is still not working: sometimes error says that dropdown contains no id/value? Even though I can see the dropdown list in the view just fine.
+
         // POST: BooksToAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBooks(int bookId, int shelfId)
+        public ActionResult AddBooks(int id, AddBookToShelfViewModel model)
         {
-            var service = CreateBookshelfService();
+            if (!ModelState.IsValid) return View(model);
 
-            if (service.AddBookToShelf(bookId, shelfId))
+            if (model.ShelfId != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch, please try again.");
+                return View(model);
+            }
+
+            var service = CreateBookshelfService();
+            var books = new ApplicationDbContext().Books.ToList();
+            ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+
+            if (service.AddBookToShelf(model))
             {
                 TempData["SaveResult"] = "Your book was added to the shelf.";
                 return RedirectToAction("Details");
             }
 
             ModelState.AddModelError("", "Your book could not be added.");
-            return View();
+            return View(model);
+            //NOTE: The below code worked before new AddBookToShelfViewModel created, and BookshelfService AddBooks was rewritten.
+            //var service = CreateBookshelfService();
+            
+            //var books = new ApplicationDbContext().Books.ToList();
+            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+            ////only two ways it can break: if service method fails! So service method is the problem to be fixed now.
+            //if (service.AddBookToShelf(model))
+            //{
+            //    TempData["SaveResult"] = "Your book was added to the shelf.";
+            //    return RedirectToAction("Details");
+            //}
+
+            //ModelState.AddModelError("", "Your book could not be added.");
+            //return View();
+
+
+            //FOR REFERENCE, FFOM EDIT POST METHOD BELOW:
+            //if (!ModelState.IsValid) return View(model);
+
+            //if (model.ShelfId != id)
+            //{
+            //    ModelState.AddModelError("", "ID Mismatch, please try again.");
+            //    return View(model);
+            //}
+
+            //var service = CreateBookshelfService();
+
+            //if (service.UpdateBookshelf(model))
+            //{
+            //    TempData["SaveResult"] = "Your bookshelf was updated.";
+            //    return RedirectToAction("Index");
+            //}
+
+            //ModelState.AddModelError("", "Your bookshelf could not be updated.");
+            //return View(model);
         } 
 
 
