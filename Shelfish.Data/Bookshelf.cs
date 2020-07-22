@@ -24,13 +24,9 @@ namespace Shelfish.Data
 
         public DateTimeOffset? ModifiedUtc { get; set; }
 
-        [DefaultValue(0)]
-        public int TotalBooks { get; set; }
-
-        
-
-        //Do I need a public int BookId property? or a public virtual Book Book property?
-        public virtual ICollection<Book> BooksOnShelf { get; set; }
-        public virtual ICollection<Audiobook> AudiobooksOnShelf { get; set; }
+        ////Do I need a public int BookId property? or a public virtual Book Book property?
+        //public virtual ICollection<Book> BooksOnShelf { get; set; }
+        //public virtual ICollection<Audiobook> AudiobooksOnShelf { get; set; }
+        ////public virtual ICollection<Author> AuthorsOnShelf { get; set; }
     }
 }

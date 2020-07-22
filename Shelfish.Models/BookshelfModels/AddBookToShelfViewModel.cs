@@ -10,13 +10,13 @@ namespace Shelfish.Models.BookshelfModels
 {
     public class AddBookToShelfViewModel
     {
-        public int ShelfId { get; set; }
+        public int ShelfRecordId { get; set; }
 
-        [Display(Name ="Shelf Name")]
-        public string ShelfName { get; set; }
+        public int SelectedShelfId { get; set; }
+        public virtual Bookshelf Shelf { get; set; }
 
-        [Display(Name ="Selected Book")]
         public int SelectedBookId { get; set; }
-        public virtual ICollection<Book> BooksOnShelf { get; set; }
+        public virtual Book Book {get ;set;}
+        
     }
 }

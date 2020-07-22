@@ -16,9 +16,9 @@ namespace Shelfish.Models.BookshelfModels
         [Display(Name ="Shelf Name")]
         public string ShelfName { get; set; }
 
-        [Display(Name = "Count")]
-        [DefaultValue(0)]
-        public int TotalBooks { get; set; }
+        //[Display(Name = "Count")]
+        //[DefaultValue(0)]
+        //public int TotalBooks { get; set; }
 
         [Display(Name = "Created")]
         public DateTimeOffset CreatedUtc { get; set; }

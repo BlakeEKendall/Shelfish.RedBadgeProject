@@ -79,6 +79,7 @@
     <Compile Include="ReviewModels\ReviewDetail.cs" />
     <Compile Include="ReviewModels\ReviewEdit.cs" />
     <Compile Include="ReviewModels\ReviewListItem.cs" />
+    <Compile Include="ViewModels\BooksOnShelfRecordView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

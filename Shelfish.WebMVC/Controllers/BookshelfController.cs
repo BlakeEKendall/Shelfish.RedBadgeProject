@@ -8,6 +8,7 @@ using System.Configuration;
 using System.EnterpriseServices;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
@@ -62,7 +63,7 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
-        // Links on Details page can take me to Controls below.
+        
 
         // GET: BOOK & ADD TO LIST -- Needs its own view page as well --> Find and add book from dropdown
         // POST: BOOK TO SHELF LIST -- Submits change, and return (RedirectToAction to GET: Details page after posted?)
@@ -70,25 +71,15 @@ namespace Shelfish.WebMVC.Controllers
         // GET: BooksToAdd
         public ActionResult AddBooks(int id)
         {
-            //NOTE: The below code was working, but before adding the new AddBookToShelfViewModel. Keep for now while testing new implementation of new view model
-            //var svc = CreateBookshelfService();
-            //var model = svc.GetBookshelfById(id);
-            //var books = new ApplicationDbContext().Books.ToList();
-            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-            //return View(model);
-
             var svc = CreateBookshelfService();
             var model = svc.GetBookshelfById(id);
-            var bookshelfToAddBookTo =
-                new AddBookToShelfViewModel
-                {
-                    ShelfId = model.ShelfId,
-                    ShelfName = model.ShelfName
-                };
-            
+            var shelfRecord = new AddBookToShelfViewModel
+            {
+                SelectedShelfId = model.ShelfId
+            };
             var books = new ApplicationDbContext().Books.ToList();
             ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-            return View(bookshelfToAddBookTo);
+            return View();
         }
 
         //THis part is still not working: sometimes error says that dropdown contains no id/value? Even though I can see the dropdown list in the view just fine.
@@ -100,7 +91,7 @@ namespace Shelfish.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (model.ShelfId != id)
+            if (model.SelectedShelfId != id)
             {
                 ModelState.AddModelError("", "ID Mismatch, please try again.");
                 return View(model);
@@ -118,41 +109,7 @@ namespace Shelfish.WebMVC.Controllers
 
             ModelState.AddModelError("", "Your book could not be added.");
             return View(model);
-            //NOTE: The below code worked before new AddBookToShelfViewModel created, and BookshelfService AddBooks was rewritten.
-            //var service = CreateBookshelfService();
-            
-            //var books = new ApplicationDbContext().Books.ToList();
-            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-            ////only two ways it can break: if service method fails! So service method is the problem to be fixed now.
-            //if (service.AddBookToShelf(model))
-            //{
-            //    TempData["SaveResult"] = "Your book was added to the shelf.";
-            //    return RedirectToAction("Details");
-            //}
-
-            //ModelState.AddModelError("", "Your book could not be added.");
-            //return View();
-
-
-            //FOR REFERENCE, FFOM EDIT POST METHOD BELOW:
-            //if (!ModelState.IsValid) return View(model);
-
-            //if (model.ShelfId != id)
-            //{
-            //    ModelState.AddModelError("", "ID Mismatch, please try again.");
-            //    return View(model);
-            //}
-
-            //var service = CreateBookshelfService();
-
-            //if (service.UpdateBookshelf(model))
-            //{
-            //    TempData["SaveResult"] = "Your bookshelf was updated.";
-            //    return RedirectToAction("Index");
-            //}
-
-            //ModelState.AddModelError("", "Your bookshelf could not be updated.");
-            //return View(model);
+           
         } 
 
 
