@@ -73,9 +73,6 @@ namespace Shelfish.Services
                         .Bookshelves
                         .Single(e => e.ShelfId == id && e.UserId == _userId);
 
-                //TODO: Add Property to BookshelfDetail model that gets Authors or Authors.Name? SO that Detail View page able to access name and display properly in list of books added?
-                //And set that detail here when BookShelfDetail GetBookshelfById() is called?
-                
                 return
                     new BookshelfDetail
                     {
