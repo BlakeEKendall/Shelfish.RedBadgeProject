@@ -10,8 +10,6 @@ namespace Shelfish.Models.BookshelfModels
 {
     public class AddBookToShelfViewModel
     {
-        public int ShelfRecordId { get; set; }
-
         public int SelectedShelfId { get; set; }
         public string SelectedShelfName { get; set; }
         

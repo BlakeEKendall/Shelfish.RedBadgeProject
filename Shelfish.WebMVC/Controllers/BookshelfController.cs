@@ -73,10 +73,10 @@ namespace Shelfish.WebMVC.Controllers
         {
             var svc = CreateBookshelfService();
             var model = svc.GetBookshelfById(id);
-            var shelfRecord = new AddBookToShelfViewModel
-            {
-                SelectedShelfId = model.ShelfId
-            };
+            //var shelfRecord = new AddBookToShelfViewModel
+            //{
+            //    SelectedShelfId = model.ShelfId
+            //};
             var books = new ApplicationDbContext().Books.ToList();
             ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
             return View();
@@ -100,7 +100,7 @@ namespace Shelfish.WebMVC.Controllers
             var service = CreateBookshelfService();
             var books = new ApplicationDbContext().Books.ToList();
             ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-
+             
             if (service.AddBookToShelf(model))
             {
                 TempData["SaveResult"] = "Your book was added to the shelf.";

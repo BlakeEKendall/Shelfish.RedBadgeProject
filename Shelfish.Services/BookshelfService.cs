@@ -108,12 +108,12 @@ namespace Shelfish.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var shelfToAddBookTo =
-                    ctx
-                    .Bookshelves
-                    .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
+                //var shelfToAddBookTo =
+                //    ctx
+                //    .Bookshelves
+                //    .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
 
-                model.SelectedShelfName = shelfToAddBookTo.ShelfName;
+                //model.SelectedShelfName = shelfToAddBookTo.ShelfName;
 
                 var bookToAddToShelf =
                     ctx
@@ -122,9 +122,16 @@ namespace Shelfish.Services
 
                 var shelfRecordToCreate = new ShelfRecordKeeper
                 {
-                    Bookshelf = shelfToAddBookTo,
-                    Book = bookToAddToShelf
+                    ShelfId = model.SelectedShelfId,
+                    BookId = bookToAddToShelf.BookId
                 };
+
+                //var shelfRecordToCreate = new ShelfRecordKeeper
+                //{
+                //    RecordKeeperId = model.ShelfRecordId,
+                //    Bookshelf = shelfToAddBookTo,
+                //    Book = bookToAddToShelf
+                //};
 
                 //TODO: NEED TO ACTUALLY ADD THIS TO THE DB!!
                 ctx.ShelfRecords.Add(shelfRecordToCreate);
