@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace Shelfish.Models.ViewModels
 {
-    public class BooksOnShelfRecordView
+    public class BookOnShelfRecordView
     {
         public int RecordKeeperId { get; set; }
 
         [Display(Name ="Shelf ID")]
         public int ShelfId { get; set; }
-
-        [Display(Name ="Shelf Name")]
-        public string ShelfName { get; set; }
 
         [Display(Name ="Book ID")]
         public int BookId { get; set; }

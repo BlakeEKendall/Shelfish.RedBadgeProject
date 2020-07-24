@@ -113,24 +113,64 @@ namespace Shelfish.Services
                     .Bookshelves
                     .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
 
+                model.SelectedShelfName = shelfToAddBookTo.ShelfName;
+
                 var bookToAddToShelf =
                     ctx
                     .Books
                     .Single(b => b.BookId == model.SelectedBookId);
 
-                var shelfRecord = new ShelfRecordKeeper
+                var shelfRecordToCreate = new ShelfRecordKeeper
                 {
-                    RecordKeeperId = model.ShelfRecordId,
                     Bookshelf = shelfToAddBookTo,
                     Book = bookToAddToShelf
                 };
+
+                //TODO: NEED TO ACTUALLY ADD THIS TO THE DB!!
+                ctx.ShelfRecords.Add(shelfRecordToCreate);
                 
                 return ctx.SaveChanges() == 1;
             }
         }
 
+        public BookOnShelfDetailView GetSingleBookOnShelf(int id)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var shelfRecordToView =
+                    ctx
+                    .ShelfRecords
+                    .Single(r=> r.RecordKeeperId == id);
+
+                return new BookOnShelfDetailView
+                {
+                    RecordKeeperId = shelfRecordToView.RecordKeeperId,
+                    ShelfId = shelfRecordToView.ShelfId,
+                    ShelfName = shelfRecordToView.Bookshelf.ShelfName,
+                    BookId = shelfRecordToView.BookId,
+                    Title = shelfRecordToView.Book.Title,
+                    Author = shelfRecordToView.Book.Author.Name
+                };
+            }
+        }
+
+        public bool DeleteBookFromShelf(int shelfRecordId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var bookRecordToDelete =
+                    ctx
+                    .ShelfRecords
+                    .Single(r=> r.RecordKeeperId == shelfRecordId);
+
+                ctx.ShelfRecords.Remove(bookRecordToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
         //TODO: Write controller to display all the books on the shelf using this service method, and then add a view to display those books.
-        public IEnumerable<BooksOnShelfRecordView> GetBooksOnShelf(int id)
+        public IEnumerable<BookOnShelfRecordView> GetBooksOnShelf(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -140,11 +180,10 @@ namespace Shelfish.Services
                         .Where(e => e.ShelfId == id)
                         .Select(
                             e =>
-                                new BooksOnShelfRecordView
+                                new BookOnShelfRecordView
                                 {
                                    RecordKeeperId = e.RecordKeeperId,
                                    ShelfId = e.ShelfId,
-                                   ShelfName = e.Bookshelf.ShelfName,
                                    BookId = e.BookId,
                                    Title = e.Book.Title,
                                    AuthorName = e.Book.Author.Name

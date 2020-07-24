@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Shelfish.Models.ViewModels.BookOnShelfRecordView>
+
+@{
+    ViewBag.Title = "BooksOnShelf";
+}
+
+<h2>BooksOnShelf</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) 
+     {
+        <tr>
+            @Html.HiddenFor(modelItem => item.RecordKeeperId)
+            @Html.HiddenFor(modelItem => item.ShelfId)
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorName)
+            </td>
+            <td>
+                @Html.ActionLink("Delete Book", "DeleteBook", new { id=item.RecordKeeperId })
+            </td>
+        </tr>
+     }
+
+</table>
+
+@Html.ActionLink("Return to Shelf Details", "Details")

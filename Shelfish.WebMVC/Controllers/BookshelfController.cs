@@ -112,6 +112,38 @@ namespace Shelfish.WebMVC.Controllers
            
         } 
 
+        // GET: BooksOnShelf
+        public ActionResult BooksOnShelf(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetBooksOnShelf(id);
+
+            return View(model);
+        }
+
+        // GET: DeleteBook
+        public ActionResult DeleteBook(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetSingleBookOnShelf(id);
+
+            return View(model);
+        }
+
+        // POST: DeleteBook
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteBookPost(int id)
+        {
+            var service = CreateBookshelfService();
+
+            service.DeleteBookFromShelf(id);
+
+            TempData["SaveResult"] = "Your book was deleted from the shelf";
+
+            return RedirectToAction("Details");
+        }
 
         // GET: Edit
         public ActionResult Edit(int id)

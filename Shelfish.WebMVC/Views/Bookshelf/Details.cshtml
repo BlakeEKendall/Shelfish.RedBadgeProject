@@ -37,14 +37,6 @@
             @Html.DisplayFor(model => model.ShelfName)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.TotalBooks)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalBooks)
-        </dd>*@
-
         <dt>
             @Html.DisplayNameFor(model => model.CreatedUtc)
         </dt>
@@ -63,45 +55,6 @@
 
     </dl>
 </div>
-
-
-@*This may change, but try this to see if will display books in detail view*@
-@*@//if (Model.BooksOnShelf != null)
-    //{
-    <div>
-        <h3>Books On Shelf</h3>
-        <table class="table">
-            <tr>
-                <th>Book ID</th>
-                <th>Title</th>
-                <th>Rating</th>
-                <th>Author</th>
-                <th></th>
-            </tr>
-                @//foreach (var item in Model.BooksOnShelf)
-    //{
-                    <tr>
-                        <td>
-                            @/*item.BookId*/
-                        </td>
-                        <td>
-                            @/*item.Title*/
-                        </td>
-                        <td>
-                            @/*item.Rating*/
-                        </td>
-                        <td>
-                            @item.Author.Name
-                        </td>
-                        <td>
-                            @/*Html.ActionLink("Remove", "DeleteBooks", new { id = item.BookId })*/
-                        </td>
-                    </tr>
-    //}
-
-        </table>
-    </div>
-    //}*@
 
 <p>
     @Html.ActionLink("Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })
