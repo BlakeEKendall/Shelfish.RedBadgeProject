@@ -170,7 +170,14 @@ namespace Shelfish.Services
                     .ShelfRecords
                     .Single(r=> r.RecordKeeperId == shelfRecordId);
 
-                ctx.ShelfRecords.Remove(bookRecordToDelete);
+                try
+                {
+                    ctx.ShelfRecords.Remove(bookRecordToDelete);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
                 return ctx.SaveChanges() == 1;
             }

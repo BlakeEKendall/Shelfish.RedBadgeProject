@@ -157,7 +157,7 @@ namespace Shelfish.WebMVC.Controllers
 
             TempData["SaveResult"] = "Your book was deleted from the shelf";
 
-            return RedirectToAction("Details");
+            return RedirectToAction("Index");
         }
 
         // GET: Edit

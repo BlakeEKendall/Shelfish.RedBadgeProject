@@ -36,12 +36,13 @@
             </td>
             <td>
                 @Html.ActionLink("Delete Book", "DeleteBook", new { id = item.RecordKeeperId }) |
-                @Html.ActionLink("Return to Details", "Details", new { id = item.ShelfId})
+                @Html.ActionLink("Return to Details", "Details", new { id = item.ShelfId })
             </td>
         </tr>
     }
-    
+
 </table>
 
+@Html.ActionLink("Return to List", "Index")
 
 

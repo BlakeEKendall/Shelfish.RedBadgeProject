@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#HelloName {
+    padding-left: 10px;
+}

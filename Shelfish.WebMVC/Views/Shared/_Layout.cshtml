@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Shelfish.MVC</title>
+    <title>@ViewBag.Title - Shelfish</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Shelfish.MVC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Shelfish", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav">
@@ -33,7 +33,7 @@
                     <a class="nav-item nav-link">@Html.ActionLink("About", "About", "Home")</a>
                     <a class="nav-item nav-link">@Html.ActionLink("Contact", "Contact", "Home")</a>
                 </div>
-                <div class="navbar-nav"@Html.Partial("_LoginPartial")</div>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -41,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Shelfish.MVC</p>
+            <p>&copy; @DateTime.Now.Year - Shelfish</p>
         </footer>
     </div>
 
