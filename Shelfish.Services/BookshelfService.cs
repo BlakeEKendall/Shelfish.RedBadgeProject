@@ -108,10 +108,10 @@ namespace Shelfish.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                //var shelfToAddBookTo =
-                //    ctx
-                //    .Bookshelves
-                //    .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
+                var shelfToAddBookTo =
+                    ctx
+                    .Bookshelves
+                    .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
 
                 //model.SelectedShelfName = shelfToAddBookTo.ShelfName;
 
@@ -122,7 +122,7 @@ namespace Shelfish.Services
 
                 var shelfRecordToCreate = new ShelfRecordKeeper
                 {
-                    ShelfId = model.SelectedShelfId,
+                    ShelfId = shelfToAddBookTo.ShelfId,
                     BookId = bookToAddToShelf.BookId
                 };
 
@@ -283,6 +283,26 @@ namespace Shelfish.Services
                         .Bookshelves
                         .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
 
+                var shelfRecordsToDelete =
+                    ctx
+                    .ShelfRecords
+                    .Where(r => r.ShelfId == shelfId)
+                    .ToList();
+                    
+
+                //Foreach loop to delete each corresponding ShelfRecord before the Shelf itself is deleted
+                foreach(ShelfRecordKeeper entity in shelfRecordsToDelete)
+                {
+                    try
+                    {
+                        ctx.ShelfRecords.Remove(entity);
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+
                 ctx.Bookshelves.Remove(shelfToDelete);
 
                 return ctx.SaveChanges() == 1;
@@ -290,27 +310,4 @@ namespace Shelfish.Services
         }
     }
 
-
-
-
-
-    //Possible ways to set up books as SelectListItems to populate dropdownlists. May need to put in separate class/view model
-    public class BookHelper
-    {
-        // BookService service = new BookService();
-        // var bookList = service.GetBooks();
-
-        //public IEnumerable<SelectListItem> BookItems
-        //{
-        //    get
-        //    {
-        //        var allBooks = bookList.Select(b => new SelectListItem
-        //        {
-        //            Value = b.BookId.ToString(),
-        //            Text = b.Title
-        //        });
-        //        return allBooks;
-        //    }
-        //}
-    }
 }

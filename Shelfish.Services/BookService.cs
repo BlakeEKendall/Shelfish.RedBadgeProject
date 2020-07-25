@@ -111,6 +111,25 @@ namespace Shelfish.Services
                         .Books
                         .Single(e => e.BookId == bookId);
 
+                var bookRecordsToDelete =
+                    ctx
+                    .ShelfRecords
+                    .Where(r => r.BookId == bookId)
+                    .ToList();
+
+                //Foreach loop to delete each corresponding ShelfRecord before the Book entity itself is deleted.
+                foreach(ShelfRecordKeeper entity in bookRecordsToDelete)
+                {
+                    try
+                    {
+                        ctx.ShelfRecords.Remove(entity);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+
                 ctx.Books.Remove(bookToDelete);
 
                 return ctx.SaveChanges() == 1;

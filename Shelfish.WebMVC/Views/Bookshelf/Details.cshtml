@@ -58,6 +58,8 @@
 
 <p>
     @Html.ActionLink("Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })
+    <br />
+    @Html.ActionLink("See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId})
 </p>
 
 <p>

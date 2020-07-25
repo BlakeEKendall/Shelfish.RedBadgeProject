@@ -73,13 +73,22 @@ namespace Shelfish.WebMVC.Controllers
         {
             var svc = CreateBookshelfService();
             var model = svc.GetBookshelfById(id);
-            //var shelfRecord = new AddBookToShelfViewModel
-            //{
-            //    SelectedShelfId = model.ShelfId
-            //};
+            
             var books = new ApplicationDbContext().Books.ToList();
-            ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-            return View();
+            var bookList = new SelectList(books.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.BookId.ToString()
+            }).ToList(), "Value", "Text");
+
+            var viewModel = new AddBookToShelfViewModel()
+            {
+                SelectedShelfId = model.ShelfId,
+                BookListItems = bookList,
+            };
+
+            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+            return View(viewModel);
         }
 
         //THis part is still not working: sometimes error says that dropdown contains no id/value? Even though I can see the dropdown list in the view just fine.
@@ -99,12 +108,18 @@ namespace Shelfish.WebMVC.Controllers
 
             var service = CreateBookshelfService();
             var books = new ApplicationDbContext().Books.ToList();
-            ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-             
+            var bookList = new SelectList(books.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.BookId.ToString()
+            }).ToList(), "Value", "Text");
+
+            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+
             if (service.AddBookToShelf(model))
             {
                 TempData["SaveResult"] = "Your book was added to the shelf.";
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = model.SelectedShelfId});
             }
 
             ModelState.AddModelError("", "Your book could not be added.");
@@ -132,7 +147,7 @@ namespace Shelfish.WebMVC.Controllers
 
         // POST: DeleteBook
         [HttpPost]
-        [ActionName("Delete")]
+        [ActionName("DeleteBook")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteBookPost(int id)
         {

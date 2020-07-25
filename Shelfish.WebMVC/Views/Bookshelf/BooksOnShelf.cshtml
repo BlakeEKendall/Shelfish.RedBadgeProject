@@ -20,8 +20,8 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) 
-     {
+    @foreach (var item in Model)
+    {
         <tr>
             @Html.HiddenFor(modelItem => item.RecordKeeperId)
             @Html.HiddenFor(modelItem => item.ShelfId)
@@ -35,11 +35,13 @@
                 @Html.DisplayFor(modelItem => item.AuthorName)
             </td>
             <td>
-                @Html.ActionLink("Delete Book", "DeleteBook", new { id=item.RecordKeeperId })
+                @Html.ActionLink("Delete Book", "DeleteBook", new { id = item.RecordKeeperId }) |
+                @Html.ActionLink("Return to Details", "Details", new { id = item.ShelfId})
             </td>
         </tr>
-     }
-
+    }
+    
 </table>
 
-@Html.ActionLink("Return to Shelf Details", "Details")
+
+
