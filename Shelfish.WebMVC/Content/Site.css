@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 5em;
+    padding-top: 6em;
     padding-bottom: 20px;
     font-family: 'Merriweather', serif;
 }
@@ -25,13 +25,20 @@ textarea {
 }
 
 /*Icons*/
+#contactIconRow {
+    align-content: center;
+    text-align: center;
+    margin: 1em 1em;
+}
+
 #socialIcons {
-    font-size: 3rem;
-    margin: 1rem;
+    font-size: 2.5rem;
+    margin: 1rem 1.5rem;
     color: yellow;
     transition: color 0.5s;
-    border-radius: 60px;
+    border-radius: 12px;
     background-color: black;
+    padding: 12px;
 }
 
 #socialIcons::before {
@@ -39,13 +46,20 @@ textarea {
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
 }
 
-    #socialIcons:hover {
-        color: orangered;
-    }
+#socialIcons:hover {
+    color: orangered;
+}
 
+#iconName {
+    align-content: center;
+}
+
+#jumboIcon {
+    color: black;
+    margin-right: 1.5px;
+}
 
 /*Navbar*/
 
@@ -57,14 +71,28 @@ textarea {
     float: right !important;
 }
 
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
 a {
     color: black;
 }
+
 
 a:hover {
         text-decoration: none;
         background-color: transparent;
         color: orangered;
+}
+
+#navbarNav {
+    font-size: 1.1rem;
+}
+
+
+#navBrandIcon {
+    color: ghostwhite;
 }
 
 
@@ -76,6 +104,8 @@ a:hover {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 
 h1, h2 {
     font-family: 'Special Elite', cursive;
