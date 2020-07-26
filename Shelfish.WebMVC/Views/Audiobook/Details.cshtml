@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Audiobook Details</h2>
 
 <div>
-    <h4>AudiobookDetail</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -103,11 +103,16 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsAbridged)
+            @if (Model.IsAbridged)
+            {<text>Yes</text>}
+            else
+            {<text>No</text>}
         </dd>
 
     </dl>
 </div>
+
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.AudiobookId }) |
     @Html.ActionLink("Back to List", "Index")

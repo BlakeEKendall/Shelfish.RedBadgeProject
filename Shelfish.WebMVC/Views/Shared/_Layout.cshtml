@@ -4,8 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Shelfish</title>
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    @*<link href="~/Content/font-awesome.min.css" rel="stylesheet" />*@
+    <script src="https://kit.fontawesome.com/bdbdfa722c.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,11 +19,12 @@
                 <button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <i class="fas fa-book" id="navBrandIcon"></i>
                 @Html.ActionLink("Shelfish", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" id="linkText">@Html.ActionLink("Home", "Index", "Home")</a>
+                    <a class="nav-item nav-link">@Html.ActionLink("Home", "Index", "Home")</a>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <a class="nav-item nav-link">@Html.ActionLink("Authors", "Index", "Author")</a>
@@ -41,7 +44,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Shelfish</p>
+            <p>&copy; @DateTime.Now.Year - <i class="fas fa-book" id="jumboIcon"></i>Shelfish</p>
         </footer>
     </div>
 
