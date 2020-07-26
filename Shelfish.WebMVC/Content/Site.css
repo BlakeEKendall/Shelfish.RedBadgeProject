@@ -25,7 +25,26 @@ textarea {
 }
 
 /*Icons*/
+#socialIcons {
+    font-size: 3rem;
+    margin: 1rem;
+    color: yellow;
+    transition: color 0.5s;
+    border-radius: 60px;
+    background-color: black;
+}
 
+#socialIcons::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+    #socialIcons:hover {
+        color: orangered;
+    }
 
 
 /*Navbar*/
