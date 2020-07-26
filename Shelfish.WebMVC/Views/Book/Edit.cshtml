@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>BookEdit</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.BookId)
@@ -85,12 +85,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-outline-success" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
+<br />
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

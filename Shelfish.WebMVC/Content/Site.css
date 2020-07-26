@@ -48,7 +48,7 @@ textarea {
     text-rendering: auto;
 }
 
-#socialIcons:hover {
+#socialIcons:hover, #entityIcon:hover {
     color: orangered;
 }
 
@@ -60,6 +60,13 @@ textarea {
     color: black;
     margin-right: 1.5px;
 }
+
+#entityIcon {
+    font-size: 1.5rem;
+    color: black;
+}
+
+
 
 /*Navbar*/
 
@@ -98,11 +105,16 @@ a:hover {
 
 /*Jumbotron & Headers*/
 #getJumbo {
+    height: 28rem;
     background-image: url('../Images/matt-artz-F6bNgXglBU0-unsplash.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#jumboContent {
+    margin-top: 6rem;
 }
 
 

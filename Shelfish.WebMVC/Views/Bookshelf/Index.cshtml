@@ -5,11 +5,14 @@
 }
 
 <h2>Bookshelf Index</h2>
-
-<p>
+<br />
+<br />
+<button type="button" class="btn btn-warning btn-lg btn-block">
     @Html.ActionLink("Create New", "Create")
-</p>
+    <i class="fas fa-archive" id="entityIcon"></i>
+</button>
 
+<br />
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,7 +20,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        
+
     </div>
 }
 
@@ -48,9 +51,9 @@
                 @Html.DisplayFor(modelItem => item.CreatedUtc)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ShelfId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ShelfId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ShelfId })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ShelfId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ShelfId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ShelfId })
             </td>
         </tr>
     }

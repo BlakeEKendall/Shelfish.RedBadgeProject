@@ -5,11 +5,15 @@
 }
 
 <h2>Audiobook Index</h2>
-
-<p>
+<br />
+<br />
+<button type="button" class="btn btn-warning btn-lg btn-block">
     @Html.ActionLink("Create New", "Create")
-</p>
+    <i class="fas fa-headphones-alt" id="entityIcon"></i>
+</button>
 
+
+<br />
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">

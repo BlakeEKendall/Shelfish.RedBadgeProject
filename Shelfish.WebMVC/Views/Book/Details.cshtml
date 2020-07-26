@@ -7,91 +7,127 @@
 <h2>Book Details</h2>
 
 <div>
-    <h4>BookDetail</h4>
+    
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BookId)
-        </dt>
+    <div class="row">
+        <div class="col-md-6">
 
-        <dd>
-            @Html.DisplayFor(model => model.BookId)
-        </dd>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.BookId)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.BookId)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Title)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Title)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SeriesTitle)
-        </dt>
+            <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.SeriesTitle)
-        </dd>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.SeriesTitle)
+                </strong>
+                <br />
+                @if (Model.SeriesTitle == null)
+                {
+                    <text>N/A</text>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.SeriesTitle)
+                }
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </dt>
+            <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.AuthorName)
-        </dd>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.AuthorName)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.AuthorName)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Isbn)
-        </dt>
+            <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Isbn)
-        </dd>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Isbn)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Isbn)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
+        </div>
+        <div class="col-md-6">
 
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Rating)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
+           <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Genre)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Language)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Publisher)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Language)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Language)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Publisher)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsEbook)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Publisher)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsEbook)
-        </dd>
+            <br />
 
-    </dl>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.IsEbook)
+                </strong>
+                <br />
+                @if (Model.IsEbook)
+                {<text>Yes</text>}
+                else
+                {<text>No</text>}
+            </p>
+
+        </div>
+    </div>
+    
 </div>
+
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
     @Html.ActionLink("Back to List", "Index")

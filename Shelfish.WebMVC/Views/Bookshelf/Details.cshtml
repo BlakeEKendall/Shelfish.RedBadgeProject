@@ -18,7 +18,7 @@
 }
 
 <div>
-    <h4>BookshelfDetail</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -56,12 +56,18 @@
     </dl>
 </div>
 
-<p>
+<br />
+<button type="button" class="btn btn-warning btn-lg btn-block">
+    <i class="fas fa-book-open" id="entityIcon"></i>
     @Html.ActionLink("Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })
-    <br />
-    @Html.ActionLink("See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId})
-</p>
+</button>
+<br />
+<button type="button" class="btn btn-info btn-lg btn-block">
+    <i class="fas fa-atlas" id="entityIcon"></i>
+    @Html.ActionLink("See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId })
+</button>    
 
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ShelfId }) |
     @Html.ActionLink("Back to List", "Index")

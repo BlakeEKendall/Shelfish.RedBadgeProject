@@ -27,13 +27,6 @@
             @Html.DisplayFor(model => model.ShelfName)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.TotalBooks)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalBooks)
-        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.CreatedUtc)
@@ -56,8 +49,9 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
+        <br />
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
