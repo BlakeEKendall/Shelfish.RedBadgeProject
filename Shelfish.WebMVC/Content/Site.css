@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 5em;
     padding-bottom: 20px;
+    font-family: 'Merriweather', serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,6 +24,41 @@ textarea {
     max-width: 280px;
 }
 
+/*Icons*/
+
+
+
+/*Navbar*/
+
 #HelloName {
     padding-left: 10px;
 }
+
+.pull-right {
+    float: right !important;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+        text-decoration: none;
+        background-color: transparent;
+        color: orangered;
+}
+
+
+/*Jumbotron & Headers*/
+#getJumbo {
+    background-image: url('../Images/matt-artz-F6bNgXglBU0-unsplash.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1, h2 {
+    font-family: 'Special Elite', cursive;
+}
+
