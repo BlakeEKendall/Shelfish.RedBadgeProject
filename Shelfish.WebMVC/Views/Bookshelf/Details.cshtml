@@ -8,12 +8,12 @@
 
 @if (TempData.ContainsKey("SaveResult"))
 {
-    <div class="alert alert-success fade in" role="alert">
-
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         @TempData["SaveResult"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        
     </div>
 }
 
@@ -38,14 +38,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TotalBooks)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalBooks)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.CreatedUtc)
         </dt>
 
@@ -64,44 +56,11 @@
     </dl>
 </div>
 
-
-@*This may change, but try this to see if will display books in detail view*@
-@if (Model.BooksOnShelf != null)
-{
-    <h3>Books On Shelf</h3>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Book ID</th>
-            <th>Title</th>
-            <th>Author</th>
-        </tr>
-
-        @foreach (var item in Model.BooksOnShelf)
-        {
-            string selectedRow = "";
-            if (item.BookId == ViewBag.BookId)
-            {
-                selectedRow = "success";
-            }
-            <tr class="@selectedRow">
-                <td>
-                    @Html.ActionLink("Select", "Index", new { bookId = item.BookId })
-                </td>
-                <td>
-                    @item.BookId
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.Author.Name
-                </td>
-            </tr>
-        }
-
-    </table>
-}
+<p>
+    @Html.ActionLink("Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })
+    <br />
+    @Html.ActionLink("See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId})
+</p>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ShelfId }) |

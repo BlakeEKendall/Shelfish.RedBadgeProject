@@ -1,9 +1,11 @@
-﻿
+﻿@model Shelfish.Models.BookshelfModels.AddBookToShelfViewModel
+
 @{
     ViewBag.Title = "AddBooks";
 }
 
 <h2>AddBooks</h2>
+<hr />
 
 
 @using (Html.BeginForm())
@@ -11,29 +13,33 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Books</h4>
+        <h4>Books To Add</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SelectedShelfId)
 
         <div class="form-horizontal">
             <div class="form-group">
-                @Html.DropDownList("BookId", (IEnumerable<SelectListItem>)ViewBag.BookList, "--Select--", new { @class = "form-control" }))
+                @Html.LabelFor(b => b.SelectedBookId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(b => b.SelectedBookId, Model.BookListItems, "--Select--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(b => b.SelectedBookId, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-outline-success" />
             </div>
         </div>
     </div>
 }
 
+@*<div>
+    @Html.ActionLink("Back To Details", "Details", new { id = Model.SelectedShelfId })
+</div>*@
 
-    <div>
-        @Html.ActionLink("Back to Details", "Details")
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -8,6 +8,7 @@ using System.Configuration;
 using System.EnterpriseServices;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
@@ -62,37 +63,102 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
-        // Links on Details page can take me to Controls below.
+        
 
         // GET: BOOK & ADD TO LIST -- Needs its own view page as well --> Find and add book from dropdown
-
         // POST: BOOK TO SHELF LIST -- Submits change, and return (RedirectToAction to GET: Details page after posted?)
 
         // GET: BooksToAdd
-        public ActionResult AddBooks()
+        public ActionResult AddBooks(int id)
         {
-            var ctx = new ApplicationDbContext();
-            ViewBag.BookList = new SelectList(ctx.Books, "BookId", "Title");
-            return View();
+            var svc = CreateBookshelfService();
+            var model = svc.GetBookshelfById(id);
+            
+            var books = new ApplicationDbContext().Books.ToList();
+            var bookList = new SelectList(books.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.BookId.ToString()
+            }).ToList(), "Value", "Text");
+
+            var viewModel = new AddBookToShelfViewModel()
+            {
+                SelectedShelfId = model.ShelfId,
+                BookListItems = bookList,
+            };
+
+            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+            return View(viewModel);
         }
+
+        //THis part is still not working: sometimes error says that dropdown contains no id/value? Even though I can see the dropdown list in the view just fine.
 
         // POST: BooksToAdd
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBooks(int bookId, int shelfId)
+        public ActionResult AddBooks(int id, AddBookToShelfViewModel model)
         {
-            var service = CreateBookshelfService();
+            if (!ModelState.IsValid) return View(model);
 
-            if (service.AddBookToShelf(bookId, shelfId))
+            if (model.SelectedShelfId != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch, please try again.");
+                return View(model);
+            }
+
+            var service = CreateBookshelfService();
+            var books = new ApplicationDbContext().Books.ToList();
+            var bookList = new SelectList(books.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.BookId.ToString()
+            }).ToList(), "Value", "Text");
+
+            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
+
+            if (service.AddBookToShelf(model))
             {
                 TempData["SaveResult"] = "Your book was added to the shelf.";
-                return RedirectToAction("Details");
+                return RedirectToAction("Details", new { id = model.SelectedShelfId});
             }
 
             ModelState.AddModelError("", "Your book could not be added.");
-            return View();
+            return View(model);
+           
         } 
 
+        // GET: BooksOnShelf
+        public ActionResult BooksOnShelf(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetBooksOnShelf(id);
+
+            return View(model);
+        }
+
+        // GET: DeleteBook
+        public ActionResult DeleteBook(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetSingleBookOnShelf(id);
+
+            return View(model);
+        }
+
+        // POST: DeleteBook
+        [HttpPost]
+        [ActionName("DeleteBook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteBookPost(int id)
+        {
+            var service = CreateBookshelfService();
+
+            service.DeleteBookFromShelf(id);
+
+            TempData["SaveResult"] = "Your book was deleted from the shelf";
+
+            return RedirectToAction("Index");
+        }
 
         // GET: Edit
         public ActionResult Edit(int id)

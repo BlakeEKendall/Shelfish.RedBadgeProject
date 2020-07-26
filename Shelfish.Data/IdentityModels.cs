@@ -38,9 +38,10 @@ namespace Shelfish.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Audiobook> Audiobooks { get; set; }
         public DbSet<Author> Authors { get; set; }
-        //public DbSet<Country> Countries { get; set; }
+        
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Bookshelf> Bookshelves { get; set; }
+        public DbSet<ShelfRecordKeeper> ShelfRecords { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,6 +53,7 @@ namespace Shelfish.Data
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
+
         }
     }
 

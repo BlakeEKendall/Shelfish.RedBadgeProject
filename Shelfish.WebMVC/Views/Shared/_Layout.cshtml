@@ -3,45 +3,45 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Shelfish.MVC</title>
+    <title>@ViewBag.Title - Shelfish</title>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Special+Elite&display=swap" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+            <div class="navbar-brand">
+                <button class="navbar-toggler pull-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("Shelfish.MVC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Shelfish", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" id="linkText">@Html.ActionLink("Home", "Index", "Home")</a>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Authors", "Index", "Author")</li>
-                        <li>@Html.ActionLink("Books", "Index", "Book")</li>
-                        <li>@Html.ActionLink("Audio", "Index", "Audiobook")</li>
-                        <li>@Html.ActionLink("Shelves", "Index", "Bookshelf")</li>
-                        <li>@Html.ActionLink("Reviews", "Index", "Review")</li>
+                        <a class="nav-item nav-link">@Html.ActionLink("Authors", "Index", "Author")</a>
+                        <a class="nav-item nav-link">@Html.ActionLink("Books", "Index", "Book")</a>
+                        <a class="nav-item nav-link">@Html.ActionLink("Audio", "Index", "Audiobook")</a>
+                        <a class="nav-item nav-link">@Html.ActionLink("Shelves", "Index", "Bookshelf")</a>
+                        <a class="nav-item nav-link">@Html.ActionLink("Reviews", "Index", "Review")</a>
                     }
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                    <a class="nav-item nav-link">@Html.ActionLink("About", "About", "Home")</a>
+                    <a class="nav-item nav-link">@Html.ActionLink("Contact", "Contact", "Home")</a>
+                </div>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Shelfish.MVC</p>
+            <p>&copy; @DateTime.Now.Year - Shelfish</p>
         </footer>
     </div>
 

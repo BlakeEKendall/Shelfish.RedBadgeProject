@@ -15,6 +15,7 @@ namespace Shelfish.WebMVC.Controllers
         // GET: Book
         public ActionResult Index()
         {
+
             var service = new BookService();
             var model = service.GetBooks();
 

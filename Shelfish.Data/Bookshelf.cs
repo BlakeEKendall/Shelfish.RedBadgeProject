@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -23,18 +24,9 @@ namespace Shelfish.Data
 
         public DateTimeOffset? ModifiedUtc { get; set; }
 
-        [Required]
-        public int TotalBooks {
-            get
-            {
-                return BooksOnShelf.Count();
-            }
-        }
-
-        
-
-        //Do I need a public int BookId property? or a public virtual Book Book property?
-        public virtual ICollection<Book> BooksOnShelf { get; set; }
-        public virtual ICollection<Audiobook> AudiobooksOnShelf { get; set; }
+        ////Do I need a public int BookId property? or a public virtual Book Book property?
+        //public virtual ICollection<Book> BooksOnShelf { get; set; }
+        //public virtual ICollection<Audiobook> AudiobooksOnShelf { get; set; }
+        ////public virtual ICollection<Author> AuthorsOnShelf { get; set; }
     }
 }

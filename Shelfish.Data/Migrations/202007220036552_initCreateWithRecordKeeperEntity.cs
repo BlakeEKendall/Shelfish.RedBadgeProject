@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initCreate : DbMigration
+    public partial class initCreateWithRecordKeeperEntity : DbMigration
     {
         public override void Up()
         {
@@ -23,13 +23,10 @@
                         AudioFormat = c.Int(nullable: false),
                         IsAbridged = c.Boolean(nullable: false),
                         AuthorId = c.Int(nullable: false),
-                        Bookshelf_ShelfId = c.Int(),
                     })
                 .PrimaryKey(t => t.AudiobookId)
                 .ForeignKey("dbo.Author", t => t.AuthorId, cascadeDelete: true)
-                .ForeignKey("dbo.Bookshelf", t => t.Bookshelf_ShelfId)
-                .Index(t => t.AuthorId)
-                .Index(t => t.Bookshelf_ShelfId);
+                .Index(t => t.AuthorId);
             
             CreateTable(
                 "dbo.Author",
@@ -55,13 +52,10 @@
                         Publisher = c.String(nullable: false),
                         IsEbook = c.Boolean(nullable: false),
                         AuthorId = c.Int(nullable: false),
-                        Bookshelf_ShelfId = c.Int(),
                     })
                 .PrimaryKey(t => t.BookId)
                 .ForeignKey("dbo.Author", t => t.AuthorId, cascadeDelete: true)
-                .ForeignKey("dbo.Bookshelf", t => t.Bookshelf_ShelfId)
-                .Index(t => t.AuthorId)
-                .Index(t => t.Bookshelf_ShelfId);
+                .Index(t => t.AuthorId);
             
             CreateTable(
                 "dbo.Bookshelf",
@@ -72,7 +66,6 @@
                         ShelfName = c.String(nullable: false),
                         CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
                         ModifiedUtc = c.DateTimeOffset(precision: 7),
-                        TotalBooks = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ShelfId);
             
@@ -88,7 +81,9 @@
                         CreatedUtc = c.DateTimeOffset(nullable: false, precision: 7),
                         ModifiedUtc = c.DateTimeOffset(precision: 7),
                     })
-                .PrimaryKey(t => t.ReviewId);
+                .PrimaryKey(t => t.ReviewId)
+                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
+                .Index(t => t.BookId);
             
             CreateTable(
                 "dbo.IdentityRole",
@@ -113,6 +108,20 @@
                 .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
                 .Index(t => t.IdentityRole_Id)
                 .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
+                "dbo.ShelfRecordKeeper",
+                c => new
+                    {
+                        RecordKeeperId = c.Int(nullable: false, identity: true),
+                        ShelfId = c.Int(nullable: false),
+                        BookId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.RecordKeeperId)
+                .ForeignKey("dbo.Book", t => t.BookId, cascadeDelete: true)
+                .ForeignKey("dbo.Bookshelf", t => t.ShelfId, cascadeDelete: true)
+                .Index(t => t.ShelfId)
+                .Index(t => t.BookId);
             
             CreateTable(
                 "dbo.ApplicationUser",
@@ -167,22 +176,25 @@
             DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
+            DropForeignKey("dbo.ShelfRecordKeeper", "ShelfId", "dbo.Bookshelf");
+            DropForeignKey("dbo.ShelfRecordKeeper", "BookId", "dbo.Book");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.Book", "Bookshelf_ShelfId", "dbo.Bookshelf");
-            DropForeignKey("dbo.Audiobook", "Bookshelf_ShelfId", "dbo.Bookshelf");
+            DropForeignKey("dbo.Review", "BookId", "dbo.Book");
             DropForeignKey("dbo.Audiobook", "AuthorId", "dbo.Author");
             DropForeignKey("dbo.Book", "AuthorId", "dbo.Author");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.ShelfRecordKeeper", new[] { "BookId" });
+            DropIndex("dbo.ShelfRecordKeeper", new[] { "ShelfId" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
-            DropIndex("dbo.Book", new[] { "Bookshelf_ShelfId" });
+            DropIndex("dbo.Review", new[] { "BookId" });
             DropIndex("dbo.Book", new[] { "AuthorId" });
-            DropIndex("dbo.Audiobook", new[] { "Bookshelf_ShelfId" });
             DropIndex("dbo.Audiobook", new[] { "AuthorId" });
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
+            DropTable("dbo.ShelfRecordKeeper");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Review");

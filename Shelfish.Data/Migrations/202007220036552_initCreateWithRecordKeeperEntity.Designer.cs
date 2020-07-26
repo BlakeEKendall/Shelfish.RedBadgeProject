@@ -7,13 +7,13 @@ namespace Shelfish.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class updatedBookshelfEntity : IMigrationMetadata
+    public sealed partial class initCreateWithRecordKeeperEntity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedBookshelfEntity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initCreateWithRecordKeeperEntity));
         
         string IMigrationMetadata.Id
         {
-            get { return "202007142132465_updatedBookshelfEntity"; }
+            get { return "202007220036552_initCreateWithRecordKeeperEntity"; }
         }
         
         string IMigrationMetadata.Source
