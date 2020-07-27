@@ -1,15 +1,15 @@
-﻿@model IEnumerable<Shelfish.Models.ViewModels.BookOnShelfRecordView>
+﻿@model IEnumerable<Shelfish.Models.ViewModels.AudiobookOnShelfRecordView>
 
 @{
-    ViewBag.Title = "BooksOnShelf";
+    ViewBag.Title = "AudiobooksOnShelf";
 }
 
-<h2>Books On Shelf</h2>
+<h2>Audiobooks On Shelf</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BookId)
+            @Html.DisplayNameFor(model => model.AudiobookId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -26,7 +26,7 @@
             @Html.HiddenFor(modelItem => item.RecordKeeperId)
             @Html.HiddenFor(modelItem => item.ShelfId)
             <td>
-                @Html.DisplayFor(modelItem => item.BookId)
+                @Html.DisplayFor(modelItem => item.AudiobookId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.AuthorName)
             </td>
             <td>
-                @Html.ActionLink("Delete Book", "DeleteBook", new { id = item.RecordKeeperId }) |
+                @Html.ActionLink("Delete Audiobook", "DeleteAudiobook", new { id = item.RecordKeeperId }) |
                 @Html.ActionLink("Return to Details", "Details", new { id = item.ShelfId })
             </td>
         </tr>
@@ -46,5 +46,3 @@
 <br />
 
 @Html.ActionLink("Return to List", "Index")
-
-

@@ -386,6 +386,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Bookshelf\AddAudiobooks.cshtml" />
+    <Content Include="Views\Bookshelf\AudiobooksOnShelf.cshtml" />
+    <Content Include="Views\Bookshelf\DeleteAudiobook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

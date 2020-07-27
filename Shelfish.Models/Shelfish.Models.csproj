@@ -90,6 +90,7 @@
     <Compile Include="BookModels\BookDetail.cs" />
     <Compile Include="BookModels\BookEdit.cs" />
     <Compile Include="BookModels\BookListItem.cs" />
+    <Compile Include="BookshelfModels\AddAudiobookToShelfViewModel.cs" />
     <Compile Include="BookshelfModels\AddBookToShelfViewModel.cs" />
     <Compile Include="BookshelfModels\BookshelfCreate.cs" />
     <Compile Include="BookshelfModels\BookshelfDetail.cs" />
@@ -100,6 +101,8 @@
     <Compile Include="ReviewModels\ReviewDetail.cs" />
     <Compile Include="ReviewModels\ReviewEdit.cs" />
     <Compile Include="ReviewModels\ReviewListItem.cs" />
+    <Compile Include="ViewModels\AudiobookOnShelfDetailView.cs" />
+    <Compile Include="ViewModels\AudiobookOnShelfRecordView.cs" />
     <Compile Include="ViewModels\BookOnShelfDetailView.cs" />
     <Compile Include="ViewModels\BookOnShelfRecordView.cs" />
   </ItemGroup>

@@ -1,14 +1,13 @@
-﻿@model Shelfish.Models.ViewModels.BookOnShelfDetailView
+﻿@model Shelfish.Models.ViewModels.AudiobookOnShelfDetailView
 
 @{
-    ViewBag.Title = "DeleteBook";
+    ViewBag.Title = "DeleteAudiobook";
 }
 
-<h2>Delete Book from Shelf</h2>
+<h2>Delete Audiobook from Shelf</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    
+
     <hr />
     <dl class="dl-horizontal">
         @Html.HiddenFor(model => model.RecordKeeperId)
@@ -21,11 +20,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BookId)
+            @Html.DisplayNameFor(model => model.ShelfName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BookId)
+            @Html.DisplayFor(model => model.ShelfName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AudiobookId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AudiobookId)
         </dd>
 
         <dt>
@@ -48,7 +55,8 @@
 
     <br />
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -57,3 +65,4 @@
         </div>
     }
 </div>
+

@@ -20,5 +20,9 @@ namespace Shelfish.Data
         [ForeignKey("Book")]
         public int BookId { get; set; }
         public virtual Book Book { get; set; }
+
+        [ForeignKey("Audiobook")]
+        public int AudiobookId { get; set; }
+        public virtual Audiobook Audiobook { get; set; }
     }
 }

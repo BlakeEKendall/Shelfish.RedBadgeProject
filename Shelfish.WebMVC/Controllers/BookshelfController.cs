@@ -63,103 +63,6 @@ namespace Shelfish.WebMVC.Controllers
             return View(model);
         }
 
-        
-
-        // GET: BOOK & ADD TO LIST -- Needs its own view page as well --> Find and add book from dropdown
-        // POST: BOOK TO SHELF LIST -- Submits change, and return (RedirectToAction to GET: Details page after posted?)
-
-        // GET: BooksToAdd
-        public ActionResult AddBooks(int id)
-        {
-            var svc = CreateBookshelfService();
-            var model = svc.GetBookshelfById(id);
-            
-            var books = new ApplicationDbContext().Books.ToList();
-            var bookList = new SelectList(books.Select(item => new SelectListItem
-            {
-                Text = item.Title,
-                Value = item.BookId.ToString()
-            }).ToList(), "Value", "Text");
-
-            var viewModel = new AddBookToShelfViewModel()
-            {
-                SelectedShelfId = model.ShelfId,
-                BookListItems = bookList,
-            };
-
-            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-            return View(viewModel);
-        }
-
-        //THis part is still not working: sometimes error says that dropdown contains no id/value? Even though I can see the dropdown list in the view just fine.
-
-        // POST: BooksToAdd
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddBooks(int id, AddBookToShelfViewModel model)
-        {
-            if (!ModelState.IsValid) return View(model);
-
-            if (model.SelectedShelfId != id)
-            {
-                ModelState.AddModelError("", "ID Mismatch, please try again.");
-                return View(model);
-            }
-
-            var service = CreateBookshelfService();
-            var books = new ApplicationDbContext().Books.ToList();
-            var bookList = new SelectList(books.Select(item => new SelectListItem
-            {
-                Text = item.Title,
-                Value = item.BookId.ToString()
-            }).ToList(), "Value", "Text");
-
-            //ViewData["SelectedBookId"] = new SelectList(books, "BookId", "Title");
-
-            if (service.AddBookToShelf(model))
-            {
-                TempData["SaveResult"] = "Your book was added to the shelf.";
-                return RedirectToAction("Details", new { id = model.SelectedShelfId});
-            }
-
-            ModelState.AddModelError("", "Your book could not be added.");
-            return View(model);
-           
-        } 
-
-        // GET: BooksOnShelf
-        public ActionResult BooksOnShelf(int id)
-        {
-            var svc = CreateBookshelfService();
-            var model = svc.GetBooksOnShelf(id);
-
-            return View(model);
-        }
-
-        // GET: DeleteBook
-        public ActionResult DeleteBook(int id)
-        {
-            var svc = CreateBookshelfService();
-            var model = svc.GetSingleBookOnShelf(id);
-
-            return View(model);
-        }
-
-        // POST: DeleteBook
-        [HttpPost]
-        [ActionName("DeleteBook")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteBookPost(int id)
-        {
-            var service = CreateBookshelfService();
-
-            service.DeleteBookFromShelf(id);
-
-            TempData["SaveResult"] = "Your book was deleted from the shelf";
-
-            return RedirectToAction("Index");
-        }
-
         // GET: Edit
         public ActionResult Edit(int id)
         {
@@ -223,6 +126,188 @@ namespace Shelfish.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        //BOOKS
+        // GET: BooksToAdd
+        public ActionResult AddBooks(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetBookshelfById(id);
+            
+            var books = new ApplicationDbContext().Books.ToList();
+            var bookList = new SelectList(books.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.BookId.ToString()
+            }).ToList(), "Value", "Text");
+
+            var viewModel = new AddBookToShelfViewModel()
+            {
+                SelectedShelfId = model.ShelfId,
+                BookListItems = bookList,
+            };
+
+            return View(viewModel);
+        }
+
+
+        // POST: BooksToAdd
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBooks(int id, AddBookToShelfViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.SelectedShelfId != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch, please try again.");
+                return View(model);
+            }
+
+            var service = CreateBookshelfService();
+            var books = new ApplicationDbContext().Books.ToList();
+            var bookList = new SelectList(books.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.BookId.ToString()
+            }).ToList(), "Value", "Text");
+
+
+            if (service.AddBookToShelf(model))
+            {
+                TempData["SaveResult"] = "Your book was added to the shelf.";
+                return RedirectToAction("Details", new { id = model.SelectedShelfId});
+            }
+
+            ModelState.AddModelError("", "Your book could not be added.");
+            return View(model);
+           
+        } 
+
+        // GET: BooksOnShelf
+        public ActionResult BooksOnShelf(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetBooksOnShelf(id);
+
+            return View(model);
+        }
+
+        // GET: DeleteBook
+        public ActionResult DeleteBook(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetSingleBookOnShelf(id);
+
+            return View(model);
+        }
+
+        // POST: DeleteBook
+        [HttpPost]
+        [ActionName("DeleteBook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteBookPost(int id)
+        {
+            var service = CreateBookshelfService();
+
+            service.DeleteBookFromShelf(id);
+
+            TempData["SaveResult"] = "Your book was deleted from the shelf";
+
+            return RedirectToAction("Index");
+        }
+
+        
+        //TODO: ADD VIEWS FOR AUDIOBOOKS!!!
+        //AUDIOBOOKS
+        // GET: AudiobooksToAdd
+        public ActionResult AddAudiobooks(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetBookshelfById(id);
+
+            var audiobooks = new ApplicationDbContext().Audiobooks.ToList();
+            var audiobookList = new SelectList(audiobooks.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.AudiobookId.ToString()
+            }).ToList(), "Value", "Text");
+
+            var viewModel = new AddAudiobookToShelfViewModel()
+            {
+                SelectedShelfId = model.ShelfId,
+                AudiobookListItems = audiobookList,
+            };
+
+            return View(viewModel);
+        }
+
+
+        // POST: AudiobooksToAdd
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAudiobooks(int id, AddAudiobookToShelfViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.SelectedShelfId != id)
+            {
+                ModelState.AddModelError("", "ID Mismatch, please try again.");
+                return View(model);
+            }
+
+            var service = CreateBookshelfService();
+            var audiobooks = new ApplicationDbContext().Audiobooks.ToList();
+            var audiobookList = new SelectList(audiobooks.Select(item => new SelectListItem
+            {
+                Text = item.Title,
+                Value = item.AudiobookId.ToString()
+            }).ToList(), "Value", "Text");
+
+
+            if (service.AddAudiobookToShelf(model))
+            {
+                TempData["SaveResult"] = "Your audiobook was added to the shelf.";
+                return RedirectToAction("Details", new { id = model.SelectedShelfId });
+            }
+
+            ModelState.AddModelError("", "Your audiobook could not be added.");
+            return View(model);
+        }
+
+        // GET: AudiobooksOnShelf
+        public ActionResult AudiobooksOnShelf(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetAudiobooksOnShelf(id);
+
+            return View(model);
+        }
+
+        // GET: DeleteAudiobook
+        public ActionResult DeleteAudiobook(int id)
+        {
+            var svc = CreateBookshelfService();
+            var model = svc.GetSingleAudiobookOnShelf(id);
+
+            return View(model);
+        }
+
+        // POST: DeleteAudiobook
+        [HttpPost]
+        [ActionName("DeleteAudiobook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAudiobookPost(int id)
+        {
+            var service = CreateBookshelfService();
+
+            service.DeleteAudiobookFromShelf(id);
+
+            TempData["SaveResult"] = "Your audiobook was deleted from the shelf";
+
+            return RedirectToAction("Index");
+        }
+
 
 
         private BookshelfService CreateBookshelfService()
