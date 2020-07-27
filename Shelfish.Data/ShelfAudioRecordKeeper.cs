@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace Shelfish.Data
 {
-    public class ShelfRecordKeeper
+    public class ShelfAudioRecordKeeper
     {
         [Key]
-        public int RecordKeeperId { get; set; }
+        public int AudioRecordKeeperId { get; set; }
 
         [ForeignKey("Bookshelf")]
         public int ShelfId { get; set; }
         public virtual Bookshelf Bookshelf { get; set; }
 
-        [ForeignKey("Book")]
-        public int BookId { get; set; }
-        public virtual Book Book { get; set; }
+        [ForeignKey("Audiobook")]
+        public int AudiobookId { get; set; }
+        public virtual Audiobook Audiobook { get; set; }
     }
 }

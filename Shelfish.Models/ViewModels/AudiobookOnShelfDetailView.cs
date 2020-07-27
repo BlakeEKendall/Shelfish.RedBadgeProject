@@ -9,7 +9,7 @@ namespace Shelfish.Models.ViewModels
 {
     public class AudiobookOnShelfDetailView
     {
-        public int RecordKeeperId { get; set; }
+        public int AudioRecordKeeperId { get; set; }
         public int ShelfId { get; set; }
 
         [Display(Name = "Shelf Name")]

@@ -23,7 +23,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            @Html.HiddenFor(modelItem => item.RecordKeeperId)
+            @Html.HiddenFor(modelItem => item.AudioRecordKeeperId)
             @Html.HiddenFor(modelItem => item.ShelfId)
             <td>
                 @Html.DisplayFor(modelItem => item.AudiobookId)
@@ -35,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.AuthorName)
             </td>
             <td>
-                @Html.ActionLink("Delete Audiobook", "DeleteAudiobook", new { id = item.RecordKeeperId }) |
+                @Html.ActionLink("Delete Audiobook", "DeleteAudiobook", new { id = item.AudioRecordKeeperId }) |
                 @Html.ActionLink("Return to Details", "Details", new { id = item.ShelfId })
             </td>
         </tr>

@@ -250,13 +250,13 @@ namespace Shelfish.Services
                     .Audiobooks
                     .Single(b => b.AudiobookId == model.SelectedAudiobookId);
 
-                var shelfRecordToCreate = new ShelfRecordKeeper
+                var shelfAudioRecordToCreate = new ShelfAudioRecordKeeper
                 {
                     ShelfId = shelfToAddBookTo.ShelfId,
                     AudiobookId = audiobookToAddToShelf.AudiobookId
                 };
 
-                ctx.ShelfRecords.Add(shelfRecordToCreate);
+                ctx.ShelfAudioRecords.Add(shelfAudioRecordToCreate);
 
                 return ctx.SaveChanges() == 1;
             }
@@ -266,19 +266,19 @@ namespace Shelfish.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var shelfRecordToView =
+                var shelfAudioRecordToView =
                     ctx
-                    .ShelfRecords
-                    .Single(r => r.RecordKeeperId == id);
+                    .ShelfAudioRecords
+                    .Single(r => r.AudioRecordKeeperId == id);
 
                 return new AudiobookOnShelfDetailView
                 {
-                    RecordKeeperId = shelfRecordToView.RecordKeeperId,
-                    ShelfId = shelfRecordToView.ShelfId,
-                    ShelfName = shelfRecordToView.Bookshelf.ShelfName,
-                    AudiobookId = shelfRecordToView.AudiobookId,
-                    Title = shelfRecordToView.Audiobook.Title,
-                    Author = shelfRecordToView.Audiobook.Author.Name
+                    AudioRecordKeeperId = shelfAudioRecordToView.AudioRecordKeeperId,
+                    ShelfId = shelfAudioRecordToView.ShelfId,
+                    ShelfName = shelfAudioRecordToView.Bookshelf.ShelfName,
+                    AudiobookId = shelfAudioRecordToView.AudiobookId,
+                    Title = shelfAudioRecordToView.Audiobook.Title,
+                    Author = shelfAudioRecordToView.Audiobook.Author.Name
                 };
             }
         }
@@ -289,13 +289,13 @@ namespace Shelfish.Services
             {
                 var query =
                     ctx
-                        .ShelfRecords
+                        .ShelfAudioRecords
                         .Where(e => e.ShelfId == id)
                         .Select(
                             e =>
                                 new AudiobookOnShelfRecordView
                                 {
-                                    RecordKeeperId = e.RecordKeeperId,
+                                    AudioRecordKeeperId = e.AudioRecordKeeperId,
                                     ShelfId = e.ShelfId,
                                     AudiobookId = e.AudiobookId,
                                     Title = e.Audiobook.Title,
@@ -307,18 +307,18 @@ namespace Shelfish.Services
             }
         }
 
-        public bool DeleteAudiobookFromShelf(int shelfRecordId)
+        public bool DeleteAudiobookFromShelf(int shelfAudioRecordId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var audiobookRecordToDelete =
                     ctx
-                    .ShelfRecords
-                    .Single(r => r.RecordKeeperId == shelfRecordId);
+                    .ShelfAudioRecords
+                    .Single(r => r.AudioRecordKeeperId == shelfAudioRecordId);
 
                 try
                 {
-                    ctx.ShelfRecords.Remove(audiobookRecordToDelete);
+                    ctx.ShelfAudioRecords.Remove(audiobookRecordToDelete);
                 }
                 catch (Exception ex)
                 {
@@ -328,14 +328,6 @@ namespace Shelfish.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
-
-
-
-
-
-
-
 
     }
 

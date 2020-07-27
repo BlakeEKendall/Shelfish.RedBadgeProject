@@ -113,10 +113,30 @@ namespace Shelfish.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                
                 var audiobookToDelete =
                     ctx
                         .Audiobooks
                         .Single(e => e.AudiobookId == audiobookId);
+
+                var audiobookRecordsToDelete =
+                    ctx
+                    .ShelfAudioRecords
+                    .Where(r => r.AudiobookId == audiobookId)
+                    .ToList();
+
+                //Foreach loop to delete each corresponding ShelfRecord before the Book entity itself is deleted.
+                foreach (ShelfAudioRecordKeeper entity in audiobookRecordsToDelete)
+                {
+                    try
+                    {
+                        ctx.ShelfAudioRecords.Remove(entity);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
 
                 ctx.Audiobooks.Remove(audiobookToDelete);
 

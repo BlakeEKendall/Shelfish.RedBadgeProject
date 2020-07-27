@@ -42,6 +42,7 @@ namespace Shelfish.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Bookshelf> Bookshelves { get; set; }
         public DbSet<ShelfRecordKeeper> ShelfRecords { get; set; }
+        public DbSet<ShelfAudioRecordKeeper> ShelfAudioRecords { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
