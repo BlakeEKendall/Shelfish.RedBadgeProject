@@ -61,9 +61,17 @@ textarea {
     margin-right: 1.5px;
 }
 
-#entityIcon {
+#entityIcon, #entityIconYellow {
     font-size: 1.5rem;
     color: black;
+}
+
+#entityIconYellow:hover {
+    color: rebeccapurple;
+}
+
+#entityIconYellow:hover a {
+    color: rebeccapurple !important;
 }
 
 
@@ -105,7 +113,7 @@ a:hover {
 
 /*Jumbotron & Headers*/
 #getJumbo {
-    height: 28rem;
+    height: 27rem;
     background-image: url('../Images/matt-artz-F6bNgXglBU0-unsplash.jpg');
     background-attachment: fixed;
     background-position: center;
@@ -123,3 +131,20 @@ h1, h2 {
     font-family: 'Special Elite', cursive;
 }
 
+/*About*/
+#aboutText {
+    font-size: 1.2rem;
+}
+
+#contactEmail {
+    color: orangered;
+}
+
+#contactEmail:hover {
+    color: mediumblue;
+}
+
+/*Bookshelf Details*/
+#shelfButtons {
+    padding: 0.5rem 6rem;
+}
