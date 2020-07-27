@@ -13,59 +13,68 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        
+
     </div>
 }
 
 <div>
-    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ShelfId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ShelfId)
-        </dd>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShelfId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShelfName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedUtc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedUtc)
+            </th>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ShelfName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShelfName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedUtc)
-        </dd>
-
-    </dl>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.ShelfId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ShelfName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CreatedUtc)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ModifiedUtc)
+            </td>
+        </tr>
+    </table>
 </div>
 
 <br />
-<button type="button" class="btn btn-warning btn-lg btn-block">
-    <i class="fas fa-book-open" id="entityIcon"></i>
-    @Html.ActionLink("Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })
-</button>
-<br />
-<button type="button" class="btn btn-info btn-lg btn-block">
-    <i class="fas fa-atlas" id="entityIcon"></i>
-    @Html.ActionLink("See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId })
-</button>    
+<div class="container" id="shelfButtons">
+    <button type="button" class="btn btn-warning btn-lg btn-block">
+        <i class="fas fa-book-open" id="entityIconYellow">@Html.ActionLink(" Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })</i>
+
+    </button>
+    <br />
+    <button type="button" class="btn btn-info btn-lg btn-block">
+        <i class="fas fa-atlas" id="entityIcon">@Html.ActionLink(" See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId })</i>
+
+    </button>
+    <br />
+    <button type="button" class="btn btn-warning btn-lg btn-block">
+        <i class="fas fa-headphones" id="entityIconYellow">@Html.ActionLink(" Add Audiobook To Shelf", "AddAudiobooks", new { id = Model.ShelfId })</i>
+
+    </button>
+    <br />
+    <button type="button" class="btn btn-info btn-lg btn-block">
+        <i class="fas fa-compact-disc" id="entityIcon">@Html.ActionLink(" See All Shelved Audiobooks", "AudiobooksOnShelf", new { id = Model.ShelfId })</i>
+
+    </button>
+</div>
 
 <br />
 <p>

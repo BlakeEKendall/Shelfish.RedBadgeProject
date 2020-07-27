@@ -1,5 +1,4 @@
-﻿using Shelfish.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,13 +8,12 @@ using System.Web.Mvc;
 
 namespace Shelfish.Models.BookshelfModels
 {
-    public class AddBookToShelfViewModel
+    public class AddAudiobookToShelfViewModel
     {
         public int SelectedShelfId { get; set; }
 
-        [Display(Name ="Selected Book")]
-        public int SelectedBookId { get; set; }
-        public IEnumerable<SelectListItem> BookListItems { get; set; }
-
+        [Display(Name = "Selected Audiobook")]
+        public int SelectedAudiobookId { get; set; }
+        public IEnumerable<SelectListItem> AudiobookListItems { get; set; }
     }
 }

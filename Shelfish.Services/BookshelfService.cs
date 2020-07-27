@@ -101,9 +101,43 @@ namespace Shelfish.Services
             }
         }
 
-        //TODO: Rewrite using new ShelfRecordKeeper entity to add books to shelves. -->DONE 7/21
-        //TODO Next: Rewrite Controller to use this method correctly to add a book to the shelf.
-        //TODO Last: Rewrite or Add new View to correctly add books to the shelf.
+        public bool DeleteBookshelf(int shelfId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfToDelete =
+                    ctx
+                        .Bookshelves
+                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
+
+                var shelfRecordsToDelete =
+                    ctx
+                    .ShelfRecords
+                    .Where(r => r.ShelfId == shelfId)
+                    .ToList();
+
+
+                //Foreach loop to delete each corresponding ShelfRecord before the Shelf itself is deleted
+                foreach (ShelfRecordKeeper entity in shelfRecordsToDelete)
+                {
+                    try
+                    {
+                        ctx.ShelfRecords.Remove(entity);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+
+                ctx.Bookshelves.Remove(shelfToDelete);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        //Books to Shelves
+        //Working with ShelfRecordKeeper entities to connect books to shelves
         public bool AddBookToShelf(AddBookToShelfViewModel model)
         {
             using (var ctx = new ApplicationDbContext())
@@ -113,7 +147,6 @@ namespace Shelfish.Services
                     .Bookshelves
                     .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
 
-                //model.SelectedShelfName = shelfToAddBookTo.ShelfName;
 
                 var bookToAddToShelf =
                     ctx
@@ -126,14 +159,6 @@ namespace Shelfish.Services
                     BookId = bookToAddToShelf.BookId
                 };
 
-                //var shelfRecordToCreate = new ShelfRecordKeeper
-                //{
-                //    RecordKeeperId = model.ShelfRecordId,
-                //    Bookshelf = shelfToAddBookTo,
-                //    Book = bookToAddToShelf
-                //};
-
-                //TODO: NEED TO ACTUALLY ADD THIS TO THE DB!!
                 ctx.ShelfRecords.Add(shelfRecordToCreate);
                 
                 return ctx.SaveChanges() == 1;
@@ -160,30 +185,7 @@ namespace Shelfish.Services
                 };
             }
         }
-
-        public bool DeleteBookFromShelf(int shelfRecordId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var bookRecordToDelete =
-                    ctx
-                    .ShelfRecords
-                    .Single(r=> r.RecordKeeperId == shelfRecordId);
-
-                try
-                {
-                    ctx.ShelfRecords.Remove(bookRecordToDelete);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-
-                return ctx.SaveChanges() == 1;
-            }
-        }
-
-        //TODO: Write controller to display all the books on the shelf using this service method, and then add a view to display those books.
+        
         public IEnumerable<BookOnShelfRecordView> GetBooksOnShelf(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -207,114 +209,126 @@ namespace Shelfish.Services
                 return query.ToArray();
             }
         }
-        //OLD ADDBOOKTOSHELF METHOD CODE
-        //var shelfToAddBookTo =
-        //    ctx
-        //    .Bookshelves
-        //    .Single(s => s.ShelfId == model.ShelfId && s.UserId == _userId);
 
-
-        //var bookToAddToShelf =
-        //    ctx
-        //    .Books
-        //    .Single(b => b.BookId == model.SelectedBookId);
-
-
-        ////bookToAddToShelf.BookId = model.SelectedBookId;
-
-        //shelfToAddBookTo.BooksOnShelf.Add(bookToAddToShelf);
-        ////shelfToAddBookTo.TotalBooks++;
-        //return ctx.SaveChanges() == 1;
-
-
-        // From BookshelfDetail page, all info listed. Hit button to add book, want to pass ShelfId into next view with the dropdown. Select book from dropdown, 
-        // Data passed into dropdownlist to populate is the BOokId. Keep both Ids, and pass into AddToShelf method.
-        // Use hiddenfor tag to pass data to view without showing it. 
-
-        // look @ ViewBags to populate DropDownLists? passing data to the view.
-        // Made new SelectList, pass to view via ViewBag?
-        // Ask Nick or Marty about this Saturday if needed!
-
-
-        //Will Need additional method here to Delete book from list!!
-
-
-        //public bool DeleteBookFromShelf(int shelfId, int bookId)
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var shelfToRemoveBookFrom =
-        //            ctx
-        //            .Bookshelves
-        //            .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
-
-        //        var bookToBeDeletedFromShelf =
-        //            shelfToRemoveBookFrom
-        //            .BooksOnShelf
-        //            .Single(b => b.BookId == bookId);
-
-        //        shelfToRemoveBookFrom.BooksOnShelf.Remove(bookToBeDeletedFromShelf);
-        //        shelfToRemoveBookFrom.TotalBooks--;
-        //        return ctx.SaveChanges() == 1;
-        //    }
-        //}
-
-        //public bool AddAudiobookToShelf(int audioId, int shelfId)
-        //{
-        //    using(var ctx = new ApplicationDbContext())
-        //    {
-        //        var audiobookToAddToShelf =
-        //            ctx
-        //            .Audiobooks
-        //            .Single(e => e.AudiobookId == audioId);
-
-        //        var shelfToAddAudiobookTo =
-        //            ctx
-        //            .Bookshelves
-        //            .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
-
-        //        shelfToAddAudiobookTo.AudiobooksOnShelf.Add(audiobookToAddToShelf);
-        //        shelfToAddAudiobookTo.TotalBooks++;
-        //        return ctx.SaveChanges() == 1;
-        //    }
-        //}
-
-
-
-        public bool DeleteBookshelf(int shelfId)
+        public bool DeleteBookFromShelf(int shelfRecordId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var shelfToDelete =
-                    ctx
-                        .Bookshelves
-                        .Single(e => e.ShelfId == shelfId && e.UserId == _userId);
-
-                var shelfRecordsToDelete =
+                var bookRecordToDelete =
                     ctx
                     .ShelfRecords
-                    .Where(r => r.ShelfId == shelfId)
-                    .ToList();
-                    
+                    .Single(r => r.RecordKeeperId == shelfRecordId);
 
-                //Foreach loop to delete each corresponding ShelfRecord before the Shelf itself is deleted
-                foreach(ShelfRecordKeeper entity in shelfRecordsToDelete)
+                try
                 {
-                    try
-                    {
-                        ctx.ShelfRecords.Remove(entity);
-                    }
-                    catch(Exception ex)
-                    {
-                        throw ex;
-                    }
+                    ctx.ShelfRecords.Remove(bookRecordToDelete);
                 }
-
-                ctx.Bookshelves.Remove(shelfToDelete);
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        //Audiobooks to Shelves
+        //TODO: Setup service methods for Audiobooks
+        //Working with ShelfRecordKeeper entity to connect Audiobooks to Shelves
+        public bool AddAudiobookToShelf(AddAudiobookToShelfViewModel model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfToAddBookTo =
+                    ctx
+                    .Bookshelves
+                    .Single(s => s.ShelfId == model.SelectedShelfId && s.UserId == _userId);
+
+
+                var audiobookToAddToShelf =
+                    ctx
+                    .Audiobooks
+                    .Single(b => b.AudiobookId == model.SelectedAudiobookId);
+
+                var shelfAudioRecordToCreate = new ShelfAudioRecordKeeper
+                {
+                    ShelfId = shelfToAddBookTo.ShelfId,
+                    AudiobookId = audiobookToAddToShelf.AudiobookId
+                };
+
+                ctx.ShelfAudioRecords.Add(shelfAudioRecordToCreate);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public AudiobookOnShelfDetailView GetSingleAudiobookOnShelf(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var shelfAudioRecordToView =
+                    ctx
+                    .ShelfAudioRecords
+                    .Single(r => r.AudioRecordKeeperId == id);
+
+                return new AudiobookOnShelfDetailView
+                {
+                    AudioRecordKeeperId = shelfAudioRecordToView.AudioRecordKeeperId,
+                    ShelfId = shelfAudioRecordToView.ShelfId,
+                    ShelfName = shelfAudioRecordToView.Bookshelf.ShelfName,
+                    AudiobookId = shelfAudioRecordToView.AudiobookId,
+                    Title = shelfAudioRecordToView.Audiobook.Title,
+                    Author = shelfAudioRecordToView.Audiobook.Author.Name
+                };
+            }
+        }
+
+        public IEnumerable<AudiobookOnShelfRecordView> GetAudiobooksOnShelf(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                        .ShelfAudioRecords
+                        .Where(e => e.ShelfId == id)
+                        .Select(
+                            e =>
+                                new AudiobookOnShelfRecordView
+                                {
+                                    AudioRecordKeeperId = e.AudioRecordKeeperId,
+                                    ShelfId = e.ShelfId,
+                                    AudiobookId = e.AudiobookId,
+                                    Title = e.Audiobook.Title,
+                                    AuthorName = e.Audiobook.Author.Name
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+
+        public bool DeleteAudiobookFromShelf(int shelfAudioRecordId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var audiobookRecordToDelete =
+                    ctx
+                    .ShelfAudioRecords
+                    .Single(r => r.AudioRecordKeeperId == shelfAudioRecordId);
+
+                try
+                {
+                    ctx.ShelfAudioRecords.Remove(audiobookRecordToDelete);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
     }
 
 }

@@ -9,111 +9,141 @@
 <div>
     
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AudiobookId)
-        </dt>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.AudiobookId)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.AudiobookId)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.AudiobookId)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Title)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Title)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SeriesTitle)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.SeriesTitle)
+                </strong>
+                <br />
+                @if (Model.SeriesTitle == null)
+                {
+                    <text>N/A</text>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.SeriesTitle)
+                }
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.SeriesTitle)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.AuthorName)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.AuthorName)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.AuthorName)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Isbn)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Isbn)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Isbn)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Isbn)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Rating)
+            </p>
+        </div>
+    
+        <div class="col-md-6">
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Genre)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Language)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Language)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.Publisher)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Language)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Publisher)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.NarratorName)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.NarratorName)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Publisher)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NarratorName)
-        </dt>
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.AudioFormat)
+                </strong>
+                <br />
+                @Html.DisplayFor(model => model.AudioFormat)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.NarratorName)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AudioFormat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AudioFormat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAbridged)
-        </dt>
-
-        <dd>
-            @if (Model.IsAbridged)
-            {<text>Yes</text>}
+            <p>
+                <strong>
+                    @Html.DisplayNameFor(model => model.IsAbridged)
+                </strong>
+                <br />
+                @if (Model.IsAbridged)
+                {<text>Yes</text>}
             else
             {<text>No</text>}
-        </dd>
-
-    </dl>
+            </p>
+        </div>                
+    </div>
 </div>
 
-<br />
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.AudiobookId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                <br />
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.AudiobookId }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>

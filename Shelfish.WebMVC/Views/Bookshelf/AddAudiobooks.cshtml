@@ -1,10 +1,10 @@
-﻿@model Shelfish.Models.BookshelfModels.AddBookToShelfViewModel
+﻿@model Shelfish.Models.BookshelfModels.AddAudiobookToShelfViewModel
 
 @{
     ViewBag.Title = "AddBooks";
 }
 
-<h2>Add Books to Shelf</h2>
+<h2>Add Audiobooks to Shelf</h2>
 <hr />
 
 
@@ -13,17 +13,17 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Books To Add</h4>
+        <h4>Audiobooks To Add</h4>
         <br />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.SelectedShelfId)
 
         <div class="form-horizontal">
             <div class="form-group">
-                @Html.LabelFor(b => b.SelectedBookId, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(b => b.SelectedAudiobookId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(b => b.SelectedBookId, Model.BookListItems, "--Select--", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(b => b.SelectedBookId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(b => b.SelectedAudiobookId, Model.AudiobookListItems, "--Select--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(b => b.SelectedAudiobookId, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
