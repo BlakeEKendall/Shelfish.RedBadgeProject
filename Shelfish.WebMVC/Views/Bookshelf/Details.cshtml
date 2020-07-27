@@ -6,6 +6,8 @@
 
 <h2>Bookshelf Details</h2>
 
+<br />
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,6 +18,8 @@
 
     </div>
 }
+
+<br />
 
 <div>
 
@@ -57,19 +61,24 @@
 <div class="container" id="shelfButtons">
     <button type="button" class="btn btn-warning btn-lg btn-block">
         <i class="fas fa-book-open" id="entityIconYellow">@Html.ActionLink(" Add Book To Shelf", "AddBooks", new { id = Model.ShelfId })</i>
-
     </button>
+
     <br />
+
     <button type="button" class="btn btn-info btn-lg btn-block">
         <i class="fas fa-atlas" id="entityIcon">@Html.ActionLink(" See All Shelved Books", "BooksOnShelf", new { id = Model.ShelfId })</i>
 
     </button>
+
     <br />
+
     <button type="button" class="btn btn-warning btn-lg btn-block">
         <i class="fas fa-headphones" id="entityIconYellow">@Html.ActionLink(" Add Audiobook To Shelf", "AddAudiobooks", new { id = Model.ShelfId })</i>
 
     </button>
+
     <br />
+
     <button type="button" class="btn btn-info btn-lg btn-block">
         <i class="fas fa-compact-disc" id="entityIcon">@Html.ActionLink(" See All Shelved Audiobooks", "AudiobooksOnShelf", new { id = Model.ShelfId })</i>
 

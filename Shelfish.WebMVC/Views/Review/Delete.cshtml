@@ -5,61 +5,64 @@
 }
 
 <h2>Delete a Review</h2>
+<br />
+<br />
+<h3>Are you sure you want to delete this review?</h3>
 
-<h3>Are you sure you want to delete this?</h3>
+<br />
+
 <div>
     
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ReviewId)
-        </dt>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.ReviewId)</strong>
+                <br />
+                @Html.DisplayFor(model => model.ReviewId)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReviewId)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.Title)</strong>
+                <br />
+                @Html.DisplayFor(model => model.Title)
+            </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BookTitle)
-        </dt>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.BookTitle)</strong>
+                <br />
+                @Html.DisplayFor(model => model.BookTitle)
+            </p>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BookTitle)
-        </dd>
+        <div class="col-md-6">
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.Content)</strong>
+                <br />
+                @Html.DisplayFor(model => model.Content)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+            <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.CreatedUtc)</strong>
+                <br />
+                @Html.DisplayFor(model => model.CreatedUtc)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
-        </dt>
+            <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedUtc)
-        </dd>
-
-    </dl>
+            <p>
+                <strong>@Html.DisplayNameFor(model => model.ModifiedUtc)</strong>
+                <br />
+                @Html.DisplayFor(model => model.ModifiedUtc)
+            </p>
+        </div>
+    </div>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

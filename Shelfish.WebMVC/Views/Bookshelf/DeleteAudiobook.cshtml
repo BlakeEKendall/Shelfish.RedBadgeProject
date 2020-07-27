@@ -5,53 +5,48 @@
 }
 
 <h2>Delete Audiobook from Shelf</h2>
+<br />
+<br />
+<h3>Are you sure you want to delete this audiobook from the shelf?</h3>
+
+<br />
 
 <div>
 
-    <hr />
-    <dl class="dl-horizontal">
-        @Html.HiddenFor(model => model.RecordKeeperId)
-        <dt>
-            @Html.DisplayNameFor(model => model.ShelfId)
-        </dt>
+    
+    <table class="table">
+        @Html.HiddenFor(model => model.AudioRecordKeeperId)
+        @Html.HiddenFor(model => model.ShelfId)
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShelfName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AudiobookId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.ShelfId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShelfName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShelfName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AudiobookId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AudiobookId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-    </dl>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.ShelfName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.AudiobookId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Author)
+            </td>
+        </tr>
+    </table>
 
     <br />
 
