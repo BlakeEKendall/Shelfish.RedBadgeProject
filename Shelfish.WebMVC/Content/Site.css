@@ -67,16 +67,20 @@ textarea {
 }
 
 #entityIconYellow:hover {
-    color: rebeccapurple;
+    color: purple;
 }
 
 #entityIconYellow:hover a {
-    color: rebeccapurple !important;
+    color: purple !important;
 }
 
 
 
 /*Navbar*/
+.navbar {
+    justify-content: space-between;
+    align-items: center;
+}
 
 #HelloName {
     padding-left: 10px;
@@ -113,18 +117,19 @@ a:hover {
 
 /*Jumbotron & Headers*/
 #getJumbo {
-    height: 27rem;
+    height: 29rem;
     background-image: url('../Images/matt-artz-F6bNgXglBU0-unsplash.jpg');
-    background-attachment: fixed;
-    background-position: center;
+    background-attachment: local;
+    background-position:center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 3rem;
 }
 
 #jumboContent {
-    margin-top: 6rem;
+    margin-top: 2rem;
+    padding: 1.3rem;
 }
-
 
 
 h1, h2 {
@@ -147,4 +152,13 @@ h1, h2 {
 /*Bookshelf Details*/
 #shelfButtons {
     padding: 0.5rem 6rem;
+}
+
+/*Responsive*/
+@media (max-width: 576px) {
+    .jumbotron {
+        padding: 3rem 2rem;
+        text-shadow: 1px 1px #000000;
+    }
+    
 }
