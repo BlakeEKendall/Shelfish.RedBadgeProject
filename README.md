@@ -11,8 +11,9 @@
 * [Contact](#contact)
 
 ## General info
-Shelfish was initally created to help me organize my own book collection. 
-Whether reading for fun, or doing research or schoolwork, a good way to organize your books is always important!
+Shelfish was initally created to help me organize my own book collection. I currently work in a bookstore, and am constantly reading and collecting more books.
+Whether you are reading for fun, or doing research or schoolwork, a good way to organize your books is always important!
+
 
 ## Technologies
 * Tech 1 - version 1.0:
@@ -33,16 +34,20 @@ Open the file in Visual Studio or your preferred coding program, and click start
 
 
 ## Features
-List of features ready and TODOs for future development
-* Create Authors, Books, & Audiobooks.
+List of current features and TODOs for future development.
+
+Current features:
+* Create Books, & Audiobooks (with their respective authors).
 * Write reviews/notes about books in the Review section.
-* Organize books and audiobooks using Bookshelves! Keep track of what you are reading, planning to read, or have already read!
+* Save and sort books/audiobooks using Bookshelves! Keep track of what you are reading, planning to read, or have already read!
+
 
 To-do list:
-* Sorting of lists in bookshelves (e.g. by Author, Genre, or Rating).
-* Sorting of lists on main Book Index page (e.g. by Author, Genre, or Rating). 
-* Displaying list of all books by single Author
-* Reviewing Audiobooks
+* Sorting & re-ordering of lists in bookshelves (e.g. by Author, Genre, or Rating).
+* Sorting & re-ordering of lists on main Book/Audiobook Index pages (e.g. by Author, Genre, or Rating). 
+* Getting and displaying a list of books written by single Author (more functionality based around Authors other than as a reference).
+* Reviewing Audiobooks.
+* Seeing reviews created by other people, and allowing comments on them.
  
 
 ## Status
