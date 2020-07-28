@@ -27,9 +27,10 @@ Whether reading for fun, or doing research or schoolwork, a good way to organize
 ## Setup
 Clone or download a copy from the Github repository page to your local computer/repository. 
 Make sure you are using .Net Framework v4.8, download & install if needed.
+Note: You should probably go to the Package Manager Console, Enable-Migrations, and do Add-Migration (followed by an Update-Database) to make sure the local database is working!
 It might also be necessary to check your nuGet packages, and make sure everything is using the most current/stable version.
 Open the file in Visual Studio or your preferred coding program, and click start/run. Now you can use it on your local computer/database! 
-Note: No migrations or database seed necessary at this time.
+
 
 ## Features
 List of features ready and TODOs for future development
